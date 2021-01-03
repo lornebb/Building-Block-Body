@@ -75,7 +75,11 @@ As a new years resolution, Ringo would like to start working out again regularly
 
 ## Wireframes
 
-Adobe XD with Material Ui Kit expansion.
+I made wireframes for this project on Balsamiq Wireframes for mobile / tablet / desktop. It was a huge help in quickly getting the visual structure and figuring out the most simple to use user experience. Links to the wireframes are [here](https://github.com/lornebb/Building-Block-Body/tree/main/Wireframes).
+
+After the wireframes were done, a quick visual mock up of the landing page using Material UI was done using Adobe XD with a Material Ui Kit expansion. 
+
+
 
 ## Flowcharts
 
