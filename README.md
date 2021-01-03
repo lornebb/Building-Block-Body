@@ -1,6 +1,6 @@
-# Building-Block-Body
+# Work It Out
 
-It's no secret that a key to a healthy life is to be active, and for many, the hardest part is figuring out where to start. Building Block Body allows you to put your own workout together in blocks, from a database of other users' favourite excersizes.
+It's no secret that a key to a healthy life is to be active, and for many, the hardest part is figuring out where to start. Work It Out allows you to put your own workout together in blocks, from a database of other users' favourite exercises.
 
 If you would like to get in touch about this project, head over to my github profile to get the details.
 
@@ -12,8 +12,8 @@ The primary goal of this project is to allow users to create, view, store, arran
 
 ### Target User Goals
 
-* Create and store your favourite excersises.
-* Put together complete workouts from a list of all submitted individual excersises from entire user base.
+* Create and store your favourite exercise.
+* Put together complete workouts from a list of all submitted individual exercises from entire user base.
 * Have ones own library of submitted data and workout compliations that is editable.
 * View data on smart phone / tablet / desktop.
 * Have the ability to message the developer.
@@ -21,7 +21,7 @@ The primary goal of this project is to allow users to create, view, store, arran
 
 ### Developer Goals
 
-* Collect a database of excersises.
+* Collect a database of exercises.
 * Open communication with users via in-site email.
 * Generate useful analytics of data collected.
 
@@ -39,13 +39,13 @@ As a new years resolution, Ringo would like to start working out again regularly
 
 * Visually appealing website and easy/familiar navigation.
 * A safe and sensible collection and display of users data.
-* Easy to use forms for excersise data input.
+* Easy to use forms for exercise data input.
 * Easy to use complete workout builder.
 
 #### **Expectations:**
 
 * Tips for new users.
-* Tips for new-comers to excerise / how to put together a decent workout.
+* Tips for new-comers to exercise / how to put together a decent workout.
 * Profile page with history of workouts.
 * Ability to edit listings.
 
@@ -91,7 +91,7 @@ Since this was my first attempt at using databases in web development, I created
 
 ##### example collection
 
-example excersie name | key in collection |target body area | difficulty | reps | etc
+example exercise name | key in collection |target body area | difficulty | reps | etc
 :-:|:-:|:-:|:-:|:-:|:-:
 squat | _id | etc | etc | etc
 
@@ -111,7 +111,7 @@ squat | _id | etc | etc | etc
 
 * Account creation - Allows the user to log in securely, then create, edit or delete their items on the database.
 
-* Collections - Allows users to create workouts by combining chosen excersises into one workout.
+* Collections - Allows users to create workouts by combining chosen exercises into one workout.
 
 * ??? Featured exersise? or workout?
 
@@ -123,7 +123,7 @@ squat | _id | etc | etc | etc
 
 * Progression logging - where a user can track a history of what exercises have been completed and how they did. Eg. rep progression, speed progression etc.
 
-* Video integration of exercise into application. So each excersise logged can also include an inline player or uploaded video of the workout. Will most likely also include review process here for user security. 
+* Video integration of exercise into application. So each exercise logged can also include an inline player or uploaded video of the workout. Will most likely also include review process here for user security. 
 
 * Video integration to be saved privately for users tracking or filming their own progression for reference later on.
 
