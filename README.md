@@ -73,17 +73,17 @@ As a new years resolution, Ringo would like to start working out again regularly
 
 #### Background Images
 
-## Wireframes
+## Wireframes and Flowcharts
 
 I made wireframes for this project on Balsamiq Wireframes for mobile / tablet / desktop. It was a huge help in quickly getting the visual structure and figuring out the most simple to use user experience. Links to the wireframes are [here](https://github.com/lornebb/Building-Block-Body/tree/main/Wireframes).
 
 After the wireframes were done, a quick visual mock up of the landing page using Material UI was done using Adobe XD with a Material Ui Kit expansion. 
 
-
-
-## Flowcharts
+![Landing page mock up](https://github.com/lornebb/Building-Block-Body/blob/main/Wireframes/Desktop/WEB-LANDING-PAGE.jpg?raw=true)
 
 ### Account Creation Flowchart
+
+Since this was my first attempt at using databases in web development, I created a flowchart using Goodnotes for the user experience to access their log in page. Which helped to further elaborate and proove my UI concepts. This flowchart sketch is [here](https://github.com/lornebb/Building-Block-Body/tree/main/Wireframes/flowchart).
 
 ### Database Design
 
