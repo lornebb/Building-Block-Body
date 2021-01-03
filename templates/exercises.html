@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work It Out</title>
+</head>
+<body>
+    something is working...
+    {% for exercise in exercises %}
+        {{ exercise.body_target }}<br>
+        {{ exercise.exercise_name }}<br>
+        {{ exercise.est_time }}<br>
+        {{ exercise.difficulty }}<br>
+        {{ exercise.instruction }}<br>
+    {% endfor %}
+    But not the python...still
+</body>
+</html>
