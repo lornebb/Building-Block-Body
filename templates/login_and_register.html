@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="center-align">Register</h3>
+
+    <div class="row">
+        <!-- log in -->
+        <form class="col s12 m6 offset-m3 " method="POST" action="{{ url_for('log_in_register') }}">
+            <div class="card-panel">
+                <div class="row center-align">Log In</div>
+                <div class="row center-align">Already have an account?</div>
+                <!-- username -->
+                <div class="row">
+					<div class="input-field col s8 offset-s2">
+						<input id="username" name="username" type="text" class="validate" data-length="10">
+						<label for="username">Username</label>
+					</div>
+                </div>
+                <!-- passowrd -->
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <input id="password" name="password" type="password" class="validate" data-length="10">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <!-- register -->
+                <div class="row">
+                    <button type="submit" class="col s6 offset-s3 btn-large">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

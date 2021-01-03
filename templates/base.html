@@ -41,7 +41,7 @@
                 <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-                <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>button</a>
+                <a href="{{ url_for('log_in_register') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log In / Register</a>
               </ul>
             </div>
           </nav>
@@ -51,7 +51,7 @@
             <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a href="#">Log In / Register</a></li>
+            <li><a href="{{ url_for('log_in_register') }}">Log In / Register</a></li>
           </ul>
     </header>
 
