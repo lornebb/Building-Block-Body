@@ -21,10 +21,7 @@ mongo = PyMongo(app)
 @app.route("/get_exercises")
 def get_exercises():
     exercises = mongo.db.exercises.find()
-    if exercises:
-        return render_template("exercises.html", exercises=exercises)
-    else:
-        return render_template("notconnected.html")
+    return render_template("exercises.html", exercises=exercises)   
 
 
 if __name__ == "__main__":
