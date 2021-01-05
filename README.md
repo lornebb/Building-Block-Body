@@ -71,6 +71,12 @@ As a new years resolution, Ringo would like to start working out again regularly
 
 #### Images
 
+Images were sourced from the internet. 
+
+The hero image was sourced from [Womens Health Mag](https://www.womenshealthmag.com/).
+
+The icons for the body target images were sourced from [Muscle and Fitness](https://www.muscleandfitness.com/).
+
 #### Background Images
 
 ## Wireframes and Flowcharts
