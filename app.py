@@ -70,8 +70,8 @@ def login():
             # checks that hashed password matches user input and creates session cookie
             if check_password_hash(
                 username_confirmed["password"], request.form.get("loginpassword")):
-                session["user"] = request.form.get("loginusername").lower()
-                flash("Welcome back, {}".format(request.form.get("loginusername")))
+                    session["user"] = request.form.get("loginusername").lower()
+                    flash("Welcome back, {}".format(request.form.get("loginusername")))
             else:
                 # if password does not match
                 flash("Details are incorrect, please try again")
@@ -82,6 +82,14 @@ def login():
             return render_template("login")
 
     return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    # will pop user session cookie out of memory
+    flash("You have been successfully logged out!")
+    session.pop("user")
+    return redirect(url_for("get_exercises"))
 
 
 @app.route("/profile", methods=["GET", "POST"])
