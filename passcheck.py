@@ -1,5 +1,10 @@
 
 def passcheck(password):
+    '''
+    Creates function to check password type is correct, based on parameters
+    outlined below. This is modified from 
+    https://www.geeksforgeeks.org/password-validation-in-python/ 
+    '''
 
     sym = ['!', '@', '£', '$', '%', '^', '&', '*', '(',')', '_', '+']
     ok = True
