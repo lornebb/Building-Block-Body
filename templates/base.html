@@ -42,8 +42,9 @@
                   <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
                   <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
                   <!-- IF NOT SESSION: show log in / register -->
-                  <a href="{{ url_for('log_in_register') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log In / Register</a>
+                  <a href="{{ url_for('register') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Register</a>
                   <!-- IF session: show below: LOG OUT -->
+                  <a href="{{ url_for('login') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log In</a>
                 </ul>
             </div>
           </nav>
@@ -53,7 +54,10 @@
             <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a href="{{ url_for('log_in_register') }}">Log In / Register</a></li>
+            <!-- IF NOT SESSION: show log in / register -->
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <!-- IF session: show below: LOG OUT -->
+            <li><a href="{{ url_for('login') }}">Register</a></li>
           </ul> 
     </header>
   <!-- flash message area -->  
