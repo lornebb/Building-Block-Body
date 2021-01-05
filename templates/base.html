@@ -41,7 +41,9 @@
                 <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
                 <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
+                <!-- IF NOT SESSION: show log in / register -->
                 <a href="{{ url_for('log_in_register') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log In / Register</a>
+                <!-- IF session: show below: LOG OUT -->
               </ul>
             </div>
           </nav>
@@ -76,20 +78,21 @@
       {% endblock %}
     </main>
 
+    <!-- footer -->
     <footer class="page-footer">
       <div class="container">
         <div class="row page-footer-row">
           <div class="col l6 s12">
-            <h5 class="white-text">Work It Out</h5>
+            <h5 class="white-text"><u>Work It Out</u></h5>
             <p class="grey-text text-lighten-4">Make your Workout!</p>
           </div>
-          <!-- <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Need help?</h5>
              <ul>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Helpful references</a></li>
             </ul> 
-          </div> -->
+          </div>
         </div>
       </div>
       <div class="footer-copyright">
