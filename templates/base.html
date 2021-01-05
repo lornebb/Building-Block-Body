@@ -39,8 +39,8 @@
               <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
                 <a href="{{ url_for('log_in_register') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log In / Register</a>
               </ul>
             </div>
@@ -66,6 +66,7 @@
         {% endif %}
       {% endwith %}
     </section>
+    
     <div class="parallax-container">
       <div class="parallax"><img src="../static/images/young-woman-workout-at-home.jpg"></div>
     </div>
@@ -74,6 +75,34 @@
       {% block content %} 
       {% endblock %}
     </main>
+
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row page-footer-row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Work It Out</h5>
+            <p class="grey-text text-lighten-4">Make your Workout!</p>
+          </div>
+          <!-- <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+             <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+            </ul> 
+          </div> -->
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          <span id="copyright"></span> &copy LABB - for educational purposes only.
+        <a class="grey-text text-lighten-4 right" href="#!">
+          <i class="material-icons tiny">chevron_left</i>
+          <u>GitHub</u>
+          <i class="material-icons tiny">chevron_right</i>
+        </a>
+        </div>
+      </div>
+    </footer>
 
     <script
       src="http://code.jquery.com/jquery-3.5.1.min.js"
