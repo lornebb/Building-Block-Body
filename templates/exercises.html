@@ -1,12 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="row">
+
     {% for exercise in exercises %}
-        {{ exercise.body_target }}<br>
-        {{ exercise.exercise_name }}<br>
-        {{ exercise.est_time }}<br>
-        {{ exercise.difficulty }}<br>
-        {{ exercise.instruction }}<br>
+
+        <div class="col s12 m5 ">
+            <div class="card">
+                <h5 class="center-align">{{ exercise.body_target }}</h5>
+                <div class="card-image">
+                    <img src="../static/images/body_target_imgs/body-part-full-body.png">
+                    <span class="card-title blue-text text-darken-2">{{ exercise.exercise_name }}</span>
+                </div>
+                    <div class="card-content">
+                    <p>{{ exercise.instruction }}</p>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <div class="waves-effect waves-light btn-small s12 m4"><i class="material-icons left">priority_high</i>{{ exercise.difficulty }}</div>
+                        <div class="waves-effect waves-light btn-small s12 m4"><i class="material-icons left">hourglass_top</i>{{ exercise.est_time }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     {% endfor %}
+    
+</div>
+
+
+    
+
 
 {% endblock %}
