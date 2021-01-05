@@ -19,42 +19,42 @@
   </head>
   <body>
     
+    <!-- Nav bar -->
     <header>
-        <!-- Nav bar -->
+        <!-- dropdown menus -->
         <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
+            <li><a href="#!">View Exercises</a></li>
             <li class="divider"></li>
-            <li><a href="#!">three</a></li>
+            <li><a href="#!">Make Exercises</a></li>
         </ul>
         <ul id="dropdown2" class="dropdown-content">
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
+            <li><a href="#!">View Workout</a></li>
             <li class="divider"></li>
-            <li><a href="#!">three</a></li>
+            <li><a href="#!">Make Workout</a></li>
         </ul>
+        <!-- desktop nav -->
         <nav class="nav-extended">
             <div class="nav-wrapper">
               <a href="{{ url_for('get_exercises') }}" class="brand-logo">Work It Out</a>
               <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
                 <a href="{{ url_for('log_in_register') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log In / Register</a>
               </ul>
             </div>
           </nav>
-        
+        <!-- mobile nav -->
           <ul class="right sidenav" id="mobile-menu">
             <li><a href="{{ url_for('get_exercises') }}"><h4 class="center-align">Work It Out</h4></a></li>
             <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a href="{{ url_for('log_in_register') }}">Log In / Register</a></li>
           </ul>
     </header>
-  <!-- flash message -->  
+  <!-- flash message area -->  
     <section>    
       {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -70,7 +70,7 @@
     <main class="container">
       {% block content %} 
       {% endblock %}
-  </main>
+    </main>
 
     <script
       src="http://code.jquery.com/jquery-3.5.1.min.js"
