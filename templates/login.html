@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-     
-<h3 class="center-align">Log In</h3>
 
     <div class="row">
      <!-- log in -->
-        <form class="col s12 m5" method="POST" action="{{ url_for('login') }}">
+        <form class="col s12 m6 offset-m3" method="POST" action="{{ url_for('login') }}">
             <div class="card-panel">
                 <div class="row center-align"><h4>Log In</h4></div>
                 <div class="row center-align">Already have an account? Log In below.</div>
