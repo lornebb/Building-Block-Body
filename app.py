@@ -37,7 +37,7 @@ def register():
     '''
     if request.method == "POST":
         # register form - checks if user is already in database.
-        existing_user = mongo.db.exercises.find_one(
+        existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
         if existing_user:
             flash("Username already exists, please try another one or log in.")
@@ -63,15 +63,15 @@ def login():
     '''
     # log in form - checks if user is registered
     if request.method == "POST":
-        username_confirmed = mongo.db.exercises.find_one(
-        {"login-username": request.form.get("username").lower()})
+        username_confirmed = mongo.db.users.find_one(
+        {"username": request.form.get("loginusername").lower()})
         
         if username_confirmed:
             # checks that hashed password matches user input and creates session cookie
             if check_password_hash(
-                username_confirmed["login-password"], request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
-                flash("Welcome back, {}".format(request.form.get("username")))
+                username_confirmed["password"], request.form.get("loginpassword")):
+                session["user"] = request.form.get("loginusername").lower()
+                flash("Welcome back, {}".format(request.form.get("loginusername")))
             else:
                 # if password does not match
                 flash("Details are incorrect, please try again")
@@ -80,6 +80,8 @@ def login():
             # username is not in database
             flash("Incorrect details, please try again")
             return render_template("login")
+
+    return render_template("login.html")
 
 
 @app.route("/profile", methods=["GET", "POST"])
