@@ -8,6 +8,10 @@
     <div class="row">
         <div class="center-align"><h5>My exercises:</h5></div>
     </div>
+    <!-- add new exercise -->
+    <div class="center-align">
+        <a class="waves-effect waves-light btn-large" href="{{ url_for('add_new') }}"><i class="material-icons right">add_box</i>Add New</a>
+    </div>
     <div class="row z-depth-3">
         {% for exercise in exercises %}
             <div class="col s12 m5">
@@ -30,9 +34,6 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
-    <div class="center-align">
-        <a class="waves-effect waves-light btn-large"><i class="material-icons right">add_box</i>Add New</a>
     </div>
 </div>
 <div class="divider"></div>

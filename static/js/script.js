@@ -4,5 +4,6 @@ $(document).ready(function(){
     $('.dropdown-trigger-main').dropdown();
     $('.parallax').parallax();
     $('input#username, input#password').characterCounter();
+    $('select').formSelect();
     $("#copyright").text(new Date().getFullYear());
   });

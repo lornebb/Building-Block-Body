@@ -113,6 +113,18 @@ def profile():
     return redirect(url_for("login"))
 
 
+@app.route("/add_new")
+def add_new():
+    '''
+    Will render add new exercise page, and show form to create
+    a new exercise and post that data to the database.
+    '''
+    # add method post in app route, and add if else statements below for 
+    # submitting exercises.
+    username = mongo.db.users.find_one({"username": session["user"]})["username"]
+    category_name = mongo.db.target_category.find().sort("body_target", 1)
+    return render_template("add_new.html", username=username, category_name=category_name)
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
