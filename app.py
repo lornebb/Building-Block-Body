@@ -72,6 +72,7 @@ def login():
                 username_confirmed["password"], request.form.get("loginpassword")):
                     session["user"] = request.form.get("loginusername").lower()
                     flash("Welcome back, {}".format(request.form.get("loginusername")))
+                    return redirect(url_for("profile", username=session["user"]))
             else:
                 # if password does not match
                 flash("Details are incorrect, please try again")
@@ -84,6 +85,7 @@ def login():
     return render_template("login.html")
 
 
+# Log out functionality route
 @app.route("/logout")
 def logout():
     # will pop user session cookie out of memory
@@ -92,17 +94,21 @@ def logout():
     return redirect(url_for("get_exercises"))
 
 
+# Profile page route
 @app.route("/profile", methods=["GET", "POST"])
-def profile(username):
+def profile():
     '''
     Will render profile page and create exercise form. 
-    Allowing session user to add exercises to the database
+    Allowing session user to add exercises to the database.
+    Will also take users username from database.
     '''
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     
     if session["user"]:
-        return render_template("profile.html", username=username)
+        exercises = mongo.db.exercises.find()
+        return render_template("profile.html", 
+        username=username, exercises=exercises)
 
     return redirect(url_for("login"))
 
