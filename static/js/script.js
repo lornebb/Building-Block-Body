@@ -3,7 +3,7 @@ $(document).ready(function(){
     $(".dropdown-trigger").dropdown({ hover: false });
     $('.dropdown-trigger-main').dropdown();
     $('.parallax').parallax();
-    $('input#username, input#password').characterCounter();
+    $('#instruction').characterCounter();
     $('select').formSelect();
     $("#copyright").text(new Date().getFullYear());
   });
