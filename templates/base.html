@@ -21,48 +21,48 @@
     
     <!-- Nav bar -->
     <header>
-        <!-- dropdown menus -->
-          <ul id="dropdown1" class="dropdown-content">
-              <li><a href="#!">View Exercises</a></li>
-              <li class="divider"></li>
-              <li><a href="{{ url_for('add_new') }}">Make Exercises</a></li>
-          </ul>
-          <ul id="dropdown2" class="dropdown-content">
-              <li><a href="#!">View Workout</a></li>
-              <li class="divider"></li>
-              <li><a href="#!">Make Workout</a></li>
-          </ul>
-          <!-- desktop nav -->
-          <nav class="nav-extended">
-            <div class="nav-wrapper z-depth-2">
-              <a href="{{ url_for('get_exercises') }}" class="brand-logo">Work It Out</a>
-              <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
-                <ul class="right hide-on-med-and-down ">
-                  <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
-                  <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                  <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
-                  <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
-                  <!-- IF NOT SESSION: show log in / register -->
-                  <a href="{{ url_for('register') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Register</a>
-                  <!-- IF session: show below: LOG OUT -->
-                  <a href="{{ url_for('login') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log In</a>
-                  <a href="{{ url_for('logout') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log Out</a>
-                </ul>
-            </div>
-          </nav>
-          <!-- mobile nav -->
-          <ul class="right sidenav" id="mobile-menu">
-            <li><a href="{{ url_for('get_exercises') }}"><h4 class="center-align">Work It Out</h4></a></li>
-            <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
-            <li><a href="{{ url_for('profile') }}">Profile</a></li>
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
-            <!-- IF NOT SESSION: show log in / register -->
-            <li><a href="{{ url_for('register') }}">Register</a></li>
-            <!-- IF session: show below: LOG OUT -->
-            <li><a href="{{ url_for('login') }}">Log In</a></li>
-            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-          </ul> 
+      <!-- dropdown menus -->
+      <ul id="dropdown1" class="dropdown-content">
+          <li><a href="{{ url_for('get_exercises') }}">View Exercises</a></li>
+          <li class="divider"></li>
+          <li><a href="{{ url_for('add_new') }}">Make Exercises</a></li>
+      </ul>
+      <ul id="dropdown2" class="dropdown-content">
+          <li><a href="#!">View Workout</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">Make Workout</a></li>
+      </ul>
+      <!-- desktop nav -->
+      <nav class="nav-extended">
+        <div class="nav-wrapper z-depth-2">
+          <a href="{{ url_for('get_exercises') }}" class="brand-logo">Work It Out</a>
+          <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down ">
+              <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
+              <li><a href="{{ url_for('profile') }}">Profile</a></li>
+              <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
+              <li><a class="dropdown-trigger-main" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
+              <!-- IF NOT SESSION: show log in / register -->
+              <a href="{{ url_for('register') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Register</a>
+              <!-- IF session: show below: LOG OUT -->
+              <a href="{{ url_for('login') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log In</a>
+              <a href="{{ url_for('logout') }}" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Log Out</a>
+            </ul>
+        </div>
+      </nav>
+      <!-- mobile nav -->
+      <ul class="right sidenav" id="mobile-menu">
+        <li><a href="{{ url_for('get_exercises') }}"><h4 class="center-align">Work It Out</h4></a></li>
+        <li><a href="{{ url_for('get_exercises') }}">Home</a></li>
+        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Exercise<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Workout<i class="material-icons right">arrow_drop_down</i></a></li>
+        <!-- IF NOT SESSION: show log in / register -->
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+        <!-- IF session: show below: LOG OUT -->
+        <li><a href="{{ url_for('login') }}">Log In</a></li>
+        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+      </ul> 
     </header>
   <!-- flash message area -->  
     <section>    

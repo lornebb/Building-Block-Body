@@ -70,12 +70,14 @@ def login():
             # checks that hashed password matches user input and creates session cookie
             if check_password_hash(
                 username_confirmed["password"], request.form.get("loginpassword")):
-                    session["user"] = request.form.get("loginusername").lower()
-                    flash("Welcome back, {}".format(request.form.get("loginusername")))
+                    session["user"] = request.form.get(
+                        "loginusername").lower()
+                    flash("Welcome back, {}".format(
+                        request.form.get("loginusername")))
                     return redirect(url_for("profile", username=session["user"]))
             else:
                 # if password does not match
-                flash("Details are incorrect, please try again")
+                flash("Incorrect details, please try again")
                 return redirect(url_for("login"))
         else:
             # username is not in database
