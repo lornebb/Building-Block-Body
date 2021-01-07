@@ -152,10 +152,18 @@ def edit_exercise(exercise_id):
         }
         mongo.db.exercises.update({"_id": ObjectId(exercise_id)}, submit)
         flash("Exercise updated successfully")
+        return render_template("profile.html")
     
     exercise = mongo.db.exercises.find_one({"_id": ObjectId(exercise_id)})
     category_name = mongo.db.exercises.find().sort("body_target", 1)
     return render_template("edit_exercise.html", exercise=exercise, category_name=category_name)
+
+
+@app.route("/delete/<exercise_id>")
+def delete_exercise(exercise_id):
+    mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
+    flash("Exercise deleted.")
+    return redirect(url_for("profile"))
 
 
 if __name__ == "__main__":
