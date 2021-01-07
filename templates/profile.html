@@ -31,6 +31,11 @@
                             <div class="waves-effect waves-light btn-small s12 m4"><i class="material-icons left">hourglass_top</i>{{ exercise.est_time }} mins</div>
                         </div>
                     </div>
+                    {% if session.user|lower == exercise.user|lower %}
+                        <div class="card-action center-align">
+                            <a href="{{ url_for('edit_exercise', exercises_id=exercises._id) }}" class="btn-small">Edit</a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}

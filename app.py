@@ -109,8 +109,7 @@ def profile():
     
     if session["user"]:
         exercises = mongo.db.exercises.find()
-        return render_template("profile.html", 
-        username=username, exercises=exercises)
+        return render_template("profile.html", username=username, exercises=exercises)
 
     return redirect(url_for("login"))
 
@@ -138,6 +137,26 @@ def add_new():
         {"username": session["user"]})["username"]
     category_name = mongo.db.target_category.find().sort("body_target", 1)
     return render_template("add_new.html", username=username, category_name=category_name)
+
+
+@app.route("/edit_exercise/<exercises_id>", methods=["GET", "POST"])
+def edit_exercise(exercises_id):
+    if request.method == "POST":
+        submit = {
+            "body_target": request.form.get("body_target"),
+            "exercise_name": request.form.get("exercise_name"),
+            "instruction": request.form.get("instruction"),
+            "est_time": request.form.get("est_time"),
+            "difficulty": request.form.get("difficulty"),
+            "created_by": session["user"]
+        }
+        mongo.db.exercises.update({"_id": ObjectId(exercises_id)}, submit)
+        flash("Exercise updated successfully")
+    
+    exercise = mongo.db.exercises.find_one({"_id": ObjectId(exercises_id)})
+    category_name = mongo.db.exercises.find().sort("body_target", 1)
+    return render_template("edit_exercise.html", exercise=exercise, category_name=category_name)
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

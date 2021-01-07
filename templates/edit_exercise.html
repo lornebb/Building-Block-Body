@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="center-align"><h4>Hello {{ username }}, <br> make a new exercise here.</h4></div>
+
+<section class="section card">
+    <form method="POST" action="{{ url_for('edit_exercise', exercise_id=exercise=_id) }}">
+        <!-- body_target selection -->
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <select id="body_target" name="body_target" class="validate" required>
+                    <option value="" disabled>Choose Main Body target</option>
+                    {% for target_category in category_name %}
+                        {% if target_category.exercise_name == exercise.exercise_name %}
+                            <option value="{{ target_category.body_target }}" selected>{{ target_category.body_target }}</option>
+                        {% else %}
+                            <option value="{{ target_category.body_target }}">{{ target_category.body_target }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <label for="body_target">Main Body Target</label>
+            </div>
+        </div>
+        <!-- exercise name -->
+        <div class="row">
+            <div class="row">
+                <div class="input-field col s12 m6 offset-m3">
+                    <input placeholder="exercise 1" id="exercise_name" name="exercise_name" type="text" class="validate" required>
+                    <label for="first_name">Exercise Name</label>
+                </div>
+            </div>
+        </div>  
+         <!-- exercise instruction -->
+        <div class="row">
+            <div class="row">
+                <div class="input-field col s12 m6 offset-m3">
+                    <input placeholder="step by step..." id="instruction" name="instruction" type="text" class="validate" required>
+                    <label for="first_name">Instruction</label>
+                </div>
+            </div>
+        </div>  
+        <!-- estimated time -->
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <input placeholder="est time between 1 - 5 mins" id="est_time" name="est_time" type="text" class="validate" minlength="1" maxlength="1" pattern="^{1, 5}$" required>
+                <label for="first_name">Est. Time 1 - 5 minutes</label>
+            </div>
+        </div>
+        <!-- difficulty -->
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <select value="difficulty" name="difficulty">
+                    <option disabled selected>Difficulty</option>
+                    <option >Easy</option>
+                    <option >Medium</option>
+                    <option >Hard</option>
+                </select>
+            </div>
+        </div>
+        <!-- submit new exercise -->
+        <div class="center-align">
+            <button type="submit" class="waves-effect waves-light btn-large"><i class="material-icons right">add_box</i>Add Exercise</button>
+        </div>
+    </form>
+</section>
+
+{% endblock %}
