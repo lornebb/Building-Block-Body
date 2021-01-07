@@ -139,8 +139,8 @@ def add_new():
     return render_template("add_new.html", username=username, category_name=category_name)
 
 
-@app.route("/edit_exercise/<exercises_id>", methods=["GET", "POST"])
-def edit_exercise(exercises_id):
+@app.route("/edit_exercise/<exercise_id>", methods=["GET", "POST"])
+def edit_exercise(exercise_id):
     if request.method == "POST":
         submit = {
             "body_target": request.form.get("body_target"),
@@ -150,10 +150,10 @@ def edit_exercise(exercises_id):
             "difficulty": request.form.get("difficulty"),
             "created_by": session["user"]
         }
-        mongo.db.exercises.update({"_id": ObjectId(exercises_id)}, submit)
+        mongo.db.exercises.update({"_id": ObjectId(exercise_id)}, submit)
         flash("Exercise updated successfully")
     
-    exercise = mongo.db.exercises.find_one({"_id": ObjectId(exercises_id)})
+    exercise = mongo.db.exercises.find_one({"_id": ObjectId(exercise_id)})
     category_name = mongo.db.exercises.find().sort("body_target", 1)
     return render_template("edit_exercise.html", exercise=exercise, category_name=category_name)
 

@@ -4,7 +4,7 @@
 <div class="center-align"><h4>Hello {{ username }}, <br> make a new exercise here.</h4></div>
 
 <section class="section card">
-    <form method="POST" action="{{ url_for('edit_exercise', exercise_id=exercise=_id) }}">
+    <form method="POST" action="{{ url_for('edit_exercise', exercise_id=exercise._id) }}">
         <!-- body_target selection -->
         <div class="row">
             <div class="input-field col s12 m6 offset-m3">
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="row">
                 <div class="input-field col s12 m6 offset-m3">
-                    <input placeholder="exercise 1" id="exercise_name" name="exercise_name" type="text" class="validate" required>
+                    <input value="{{ exercise.exercise_name }}" id="exercise_name" name="exercise_name" type="text" class="validate" required>
                     <label for="first_name">Exercise Name</label>
                 </div>
             </div>
@@ -34,23 +34,34 @@
         <div class="row">
             <div class="row">
                 <div class="input-field col s12 m6 offset-m3">
-                    <input placeholder="step by step..." id="instruction" name="instruction" type="text" class="validate" required>
-                    <label for="first_name">Instruction</label>
+                    <input value="{{ exercise.instruction }}" id="instruction" name="instruction" type="text" class="validate" required>
+                    <label for="instruction">Instruction</label>
                 </div>
             </div>
         </div>  
         <!-- estimated time -->
         <div class="row">
-            <div class="input-field col s12 m6 offset-m3">
-                <input placeholder="est time between 1 - 5 mins" id="est_time" name="est_time" type="text" class="validate" minlength="1" maxlength="1" pattern="^{1, 5}$" required>
+            <div class="input-field col s12 m3 offset-m3 z-depth-1">
+                {% if exercise.est_time == 1 %}
+                    <input value="{{ exercise.est_time }}" id="est_time" name="est_time" type="text" class="validate" minlength="1" maxlength="1" pattern="^{1, 5}$" required>
+                {% else %}
+                    <input value="{{ exercise.est_time }}" id="est_time" name="est_time" type="text" class="validate" minlength="1" maxlength="1" pattern="^{1, 5}$" required>
+                {% endif %}
                 <label for="first_name">Est. Time 1 - 5 minutes</label>
+            </div>
+            <div class="input-field col s12 m3">
+                <input value="mins" disabled>
             </div>
         </div>
         <!-- difficulty -->
         <div class="row">
-            <div class="input-field col s12 m6 offset-m3">
-                <select value="difficulty" name="difficulty">
-                    <option disabled selected>Difficulty</option>
+            <div class="input-field col s12 m3 offset-m3 z-depth-1">
+                <input disabled value="{{ exercise.difficulty }}" name="difficulty" id="difficulty" type="text" class="validate">
+                <label for="difficulty">Current difficulty</label>
+            </div>
+            <div class="input-field col s12 m3">
+                <select value="difficulty" name="difficulty" required>
+                    <option disabled selected> New Difficulty</option>
                     <option >Easy</option>
                     <option >Medium</option>
                     <option >Hard</option>
