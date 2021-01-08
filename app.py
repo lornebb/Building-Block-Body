@@ -54,6 +54,7 @@ def register():
 
         session["user"] = request.form.get("username").lower()
         flash("Success! You are now registered.")
+        return render_template("pages/profile.html", session["user"])
 
     return render_template("pages/register.html")
 
@@ -80,7 +81,7 @@ def login():
             else:
                 # if password does not match
                 flash("Incorrect details, please try again")
-                return redirect(url_for("pages/login.html"))
+                return redirect(url_for("login"))
         else:
             # username is not in database
             flash("Incorrect details, please try again")
@@ -116,11 +117,12 @@ def logout():
     return redirect(url_for("home"))
 
 
-@app.route("/add_new", methods=["GET", "POST"])
+@app.route("/add-exercise", methods=["GET", "POST"])
 def add_new():
     '''
     Will render add new exercise page, and show form to create
-    a new exercise and post that data to the database.
+    a new exercise and post that data to the database. Also shows
+    only the body targets available in the database.
     '''
     if request.method == "POST":
         exercise = {
@@ -138,7 +140,7 @@ def add_new():
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     category_name = mongo.db.target_category.find().sort("body_target", 1)
-    return render_template("add_new.html", username=username, category_name=category_name)
+    return render_template("pages/add-exercise.html", username=username, category_name=category_name)
 
 
 @app.route("/edit_exercise/<exercise_id>", methods=["GET", "POST"])
@@ -150,15 +152,15 @@ def edit_exercise(exercise_id):
             "instruction": request.form.get("instruction"),
             "est_time": request.form.get("est_time"),
             "difficulty": request.form.get("difficulty"),
-            "created_by": session["user"]
+            "user": session["user"]
         }
         mongo.db.exercises.update({"_id": ObjectId(exercise_id)}, submit)
         flash("Exercise updated successfully")
-        return render_template("profile.html")
+        return redirect(url_for("profile"))
     
     exercise = mongo.db.exercises.find_one({"_id": ObjectId(exercise_id)})
     category_name = mongo.db.exercises.find().sort("body_target", 1)
-    return render_template("edit_exercise.html", exercise=exercise, category_name=category_name)
+    return render_template("pages/edit-exercise.html", exercise=exercise, category_name=category_name)
 
 
 @app.route("/delete/<exercise_id>")

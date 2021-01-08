@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'layout/base.html' %}
 {% block content %}
 
 <div class="center-align"><h4>Hello {{ username }}, <br> make a new exercise here.</h4></div>
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="row">
                 <div class="input-field col s12 m6 offset-m3">
-                    <input placeholder="exercise 1" id="exercise_name" name="exercise_name" type="text" class="validate" required>
+                    <input placeholder="What do you call it?" id="exercise_name" name="exercise_name" type="text" class="validate" required>
                     <label for="first_name">Exercise Name</label>
                 </div>
             </div>
@@ -30,7 +30,7 @@
         <div class="row">
             <div class="row">
                 <div class="input-field col s12 m6 offset-m3">
-                    <input placeholder="step by step..." id="instruction" name="instruction" type="text" class="validate" minlength="10" maxlength="70" data-length="70" required>
+                    <input placeholder="explain it step by step..." id="instruction" name="instruction" type="text" class="validate" minlength="10" maxlength="70" data-length="70" required>
                     <label for="first_name">Instruction</label>
                 </div>
             </div>
