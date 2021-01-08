@@ -27,6 +27,14 @@ The primary goal of this project is to allow users to create, view, store, arran
 
 ### User Stories
 
+As a user, I would like to be able to register on the website and have a tailored experience.
+
+As a user, I want to be able to log in after registration and see my account and previously submitted exercise data.
+
+As a user, I would like to be able to delete exercises I have made.
+
+etc...
+
 As a personal trainer that now needs to work remotely over video calls, Paul needs a place to digitalise her workouts to pass to clients. He is used to writing them out by hand and using it as a reference on face to face workouts, or then typing everything out to email ahead to each client every day.
 
 As a casual exeriser, John would like to put together a workout without having to subscribe to an expensive subscription app on his phone. He would like to put together workouts and change elements as he likes on a weekly basis.
