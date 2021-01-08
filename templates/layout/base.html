@@ -4,6 +4,13 @@
     {% include 'layout/head.html' %}
 </head>
 <body>
+
+  {% if session.user %}
+      {% include 'components/nav-loggedin.html' %}
+    {% else %}
+      {% include 'components/nav-home.html' %}
+  {% endif %}
+
   {% include 'components/flash-messages.html' %}
   
     {% block content %} 

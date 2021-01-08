@@ -2,10 +2,10 @@
   <!-- desktop nav -->
   <nav class="nav-extended">
     <div class="nav-wrapper z-depth-2">
-      <a href="" class="brand-logo">Work It Out</a>
+      <a href="{{ url_for('home') }}" class="brand-logo">Work It Out</a>
       <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down ">
-          <li><a href="">All Exercises</a></li>
+          <li><a href="{{ url_for('home') }}">All Exercises</a></li>
           <!-- Register and log in -->
           <a href="{{ url_for('register') }}" class="waves-effect waves-light btn"><i class="material-icons right">how_to_reg</i>Register</a>
           <a href="{{ url_for('login') }}" class="waves-effect waves-light btn"><i class="material-icons right">login</i>Log In</a>
@@ -14,8 +14,8 @@
   </nav>
   <!-- mobile nav -->
   <ul class="right sidenav" id="mobile-menu">
-    <li><a href=""><h4 class="center-align">Work It Out</h4></a></li>
-    <li><a href="">All exercises</a></li>
+    <li><a href="{{ url_for('home') }}"><h4 class="center-align">Work It Out</h4></a></li>
+    <li><a href="{{ url_for('home') }}">All exercises</a></li>
     <!-- register and log in -->
     <li><a href="{{ url_for('register') }}">Register</a></li>
     <li><a href="{{ url_for('login') }}">Log In</a></li>

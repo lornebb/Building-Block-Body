@@ -25,6 +25,7 @@ def home():
     This function loads the home landing page.
     '''
     exercises = mongo.db.exercises.find()
+    
     return render_template("pages/home.html", exercises=exercises)   
 
 
@@ -54,7 +55,7 @@ def register():
         session["user"] = request.form.get("username").lower()
         flash("Success! You are now registered.")
 
-    return render_template("register.html")
+    return render_template("pages/register.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -79,22 +80,13 @@ def login():
             else:
                 # if password does not match
                 flash("Incorrect details, please try again")
-                return redirect(url_for("login"))
+                return redirect(url_for("pages/login.html"))
         else:
             # username is not in database
             flash("Incorrect details, please try again")
-            return render_template("login")
+            return render_template("pages/login.html")
 
-    return render_template("login.html")
-
-
-# Log out functionality route
-@app.route("/logout")
-def logout():
-    # will pop user session cookie out of memory
-    flash("You have been successfully logged out!")
-    session.pop("user")
-    return redirect(url_for("get_exercises"))
+    return render_template("pages/login.html")
 
 
 # Profile page route
@@ -110,9 +102,18 @@ def profile():
     
     if session["user"]:
         exercises = mongo.db.exercises.find()
-        return render_template("profile.html", username=username, exercises=exercises)
+        return render_template("pages/profile.html", username=username, exercises=exercises)
 
     return redirect(url_for("login"))
+
+
+# Log out functionality route
+@app.route("/logout")
+def logout():
+    # will pop user session cookie out of memory
+    flash("You have been successfully logged out!")
+    session.pop("user")
+    return redirect(url_for("home"))
 
 
 @app.route("/add_new", methods=["GET", "POST"])

@@ -1,40 +1,39 @@
-<div class="center-align"><h4>All Exercises</h4></div>
-<div class="row">
-    {% for exercise in exercises %}
-        {% if session.user|lower == exercise.user|lower %}
-            <div class="col s12 m6">
-                <div class="card">
-                    <!-- cycle through images for correct  -->
-                    <div class="card-image">
-                        {% if exercise.body_target|lower == "upper body" %}
-                            <img src="{{ url_for('static', filename='static/images/body_target_imgs/upperbody.jpg')}}" >
-                        {% elif exercise.body_target|lower == "lower body" %}
-                            <img src="{{ url_for('static', filename='static/images/body_target_imgs/lower-body.jpg')}}">
-                        {% elif exercise.body_target|lower == "back body" %}
-                            <img src="{{ url_for('static', filename='static/images/body_target_imgs/back-body.jpg')}}">
-                        {% elif exercise.body_target|lower == "abdominals" %}
-                            <img src="{{ url_for('static', filename='static/images/body_target_imgs/abs.jpg')}}">
-                        {% endif %}
-                        <span class="card-title">{{ exercise.exercise_name }} - targets {{ exercise.body_target }}</span>
-                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-                    </div>
-                    <!-- exercise instruction -->
-                    <div class="card-content">
-                        <p>{{ exercise.instruction }}</p>
-                    </div>
-                    <!-- difficulty and est time boxes -->
-                    <div class="card-action center-align">
-                        <div class="row center-align">
-                            <div class="waves-effect waves-light btn-small s12"><i class="material-icons left">priority_high</i>{{ exercise.difficulty }} difficulty</div>
-                            <div class="waves-effect waves-light btn-small s12"><i class="material-icons left">hourglass_top</i>{{ exercise.est_time }} mins</div>
-                        </div>
-                        <div class="row">
-                            <a href="{{ url_for('edit_exercise', exercise_id=exercise._id) }}" class="btn-small">Edit</a>
-                            <a href="{{ url_for('delete_exercise', exercise_id=exercise._id) }}" class="btn-small red">Delete</a>
-                        </div>
-                    </div>
-                </div>
+{% for userexercises in exercises %}
+    {% if session.user == userexercises.user %}
+
+    <div class="col s12 m6">
+        <div class="card">
+            <!-- cycle through images for correct  -->
+            <div class="card-image">
+                {% if userexercises.body_target|lower == "upper body" %}
+                    <img src="{{ url_for('static', filename='images/body-target-imgs/upperbody.jpg') }}" >
+                {% elif userexercises.body_target|lower == "lower body" %}
+                    <img src="{{ url_for('static', filename='images/body-target-imgs/lower-body.jpg') }}">
+                {% elif userexercises.body_target|lower == "back body" %}
+                    <img src="{{ url_for('static', filename='images/body-target-imgs/back-body.jpg') }}">
+                {% elif userexercises.body_target|lower == "abdominals" %}
+                    <img src="{{ url_for('static', filename='images/body-target-imgs/abs.jpg') }}">
+                {% endif %}
+                <span class="card-title">{{ userexercises.exercise_name }} - targets {{ userexercises.body_target }}</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
-        {% endif %}
-    {% endfor %}
-</div>
+            <!-- exercise instruction -->
+            <div class="card-content">
+                <p>{{ userexercises.instruction }}</p>
+            </div>
+            <!-- difficulty and est time boxes -->
+            <div class="card-action center-align">
+                <div class="row center-align">
+                    <div class="waves-effect waves-light btn-small s12"><i class="material-icons left">priority_high</i>{{ userexercises.difficulty }} difficulty</div>
+                    <div class="waves-effect waves-light btn-small s12"><i class="material-icons left">hourglass_top</i>{{ userexercises.est_time }} mins</div>
+                </div>
+                <!-- if user logged in, can edit and delete -->
+                {% if session.user|lower == userexercises.user|lower %}
+                    <a href="" class="btn-small">Edit</a>
+                    <a href="" class="btn-small red">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
