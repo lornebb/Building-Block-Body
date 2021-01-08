@@ -1,7 +1,7 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 
-<div class="center-align"><h4>Hello {{ username }}, <br> make a new exercise here.</h4></div>
+<div class="center-align"><h4>Hello {{ username }}, <br> edit your exercise here.</h4></div>
 
 <section class="section card">
     <form method="POST" action="{{ url_for('edit_exercise', exercise_id=exercise._id) }}">

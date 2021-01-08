@@ -62,7 +62,8 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     '''
-    Will render log in page and create session cookie for user session.
+    Will render log in page and create session cookie
+    for user session.
     '''
     # log in form - checks if user is registered
     if request.method == "POST":
@@ -111,7 +112,9 @@ def profile():
 # Log out functionality route
 @app.route("/logout")
 def logout():
-    # will pop user session cookie out of memory
+    '''
+    will pop user session cookie out of memory
+    '''
     flash("You have been successfully logged out!")
     session.pop("user")
     return redirect(url_for("home"))
@@ -145,6 +148,9 @@ def add_new():
 
 @app.route("/edit_exercise/<exercise_id>", methods=["GET", "POST"])
 def edit_exercise(exercise_id):
+    '''
+    edit exercise
+    '''
     if request.method == "POST":
         submit = {
             "body_target": request.form.get("body_target"),
@@ -165,6 +171,9 @@ def edit_exercise(exercise_id):
 
 @app.route("/delete/<exercise_id>")
 def delete_exercise(exercise_id):
+    '''
+    will delete exercise
+    '''
     mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
     flash("Exercise deleted.")
     return redirect(url_for("profile"))

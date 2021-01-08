@@ -30,7 +30,7 @@
                 <!-- if user logged in, can edit and delete -->
                 {% if session.user|lower == userexercises.user|lower %}
                     <a href="{{ url_for('edit_exercise', exercise_id=userexercises._id) }}" class="btn-small">Edit</a>
-                    <a href="" class="btn-small red">Delete</a>
+                    <a href="{{ url_for('delete_exercise', exercise_id=userexercises._id) }}" class="btn-small red">Delete</a>
                 {% endif %}
             </div>
         </div>
