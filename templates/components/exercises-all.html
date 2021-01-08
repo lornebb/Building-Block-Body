@@ -1,23 +1,18 @@
-{% extends "base.html" %}
-{% block content %}
-
 <div class="center-align"><h4>All Exercises</h4></div>
-
 <div class="row">
-
     {% for exercise in exercises %}
     <div class="col s12 m6">
         <div class="card">
             <!-- cycle through images for correct  -->
             <div class="card-image">
                 {% if exercise.body_target|lower == "upper body" %}
-                    <img src="../static/images/body_target_imgs/upperbody.jpg">
+                    <img src="{{ url_for('static', filename='static/images/body_target_imgs/upperbody.jpg')}}" >
                 {% elif exercise.body_target|lower == "lower body" %}
-                    <img src="../static/images/body_target_imgs/lower-body.jpg">
+                    <img src="{{ url_for('static', filename='static/images/body_target_imgs/lower-body.jpg')}}">
                 {% elif exercise.body_target|lower == "back body" %}
-                    <img src="../static/images/body_target_imgs/back-body.jpg">
+                    <img src="{{ url_for('static', filename='static/images/body_target_imgs/back-body.jpg')}}">
                 {% elif exercise.body_target|lower == "abdominals" %}
-                    <img src="../static/images/body_target_imgs/abs.jpg">
+                    <img src="{{ url_for('static', filename='static/images/body_target_imgs/abs.jpg')}}">
                 {% endif %}
                 <span class="card-title">{{ exercise.exercise_name }} - targets {{ exercise.body_target }}</span>
                 <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
@@ -40,8 +35,5 @@
             </div>
         </div>
     </div>
-{% endfor %}
-
+    {% endfor %}
 </div>
-
-{% endblock %}
