@@ -6,13 +6,13 @@
             <!-- cycle through images for correct  -->
             <div class="card-image">
                 {% if exercise.body_target|lower == "upper body" %}
-                    <img src="{{ url_for('static', filename='static/images/body_target_imgs/upperbody.jpg')}}" >
+                    <img src="{{ url_for('static', filename='images/body-target-imgs/upperbody.jpg') }}" >
                 {% elif exercise.body_target|lower == "lower body" %}
-                    <img src="{{ url_for('static', filename='static/images/body_target_imgs/lower-body.jpg')}}">
+                    <img src="{{ url_for('static', filename='images/body-target-imgs/lower-body.jpg') }}">
                 {% elif exercise.body_target|lower == "back body" %}
-                    <img src="{{ url_for('static', filename='static/images/body_target_imgs/back-body.jpg')}}">
+                    <img src="{{ url_for('static', filename='images/body-target-imgs/back-body.jpg') }}">
                 {% elif exercise.body_target|lower == "abdominals" %}
-                    <img src="{{ url_for('static', filename='static/images/body_target_imgs/abs.jpg')}}">
+                    <img src="{{ url_for('static', filename='images/body-target-imgs/abs.jpg') }}">
                 {% endif %}
                 <span class="card-title">{{ exercise.exercise_name }} - targets {{ exercise.body_target }}</span>
                 <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>

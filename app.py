@@ -20,10 +20,12 @@ mongo = PyMongo(app)
 
 # landing page
 @app.route("/")
-@app.route("/get_exercises")
-def get_exercises():
+def home():
+    '''
+    This function loads the home landing page.
+    '''
     exercises = mongo.db.exercises.find()
-    return render_template("exercises.html", exercises=exercises)   
+    return render_template("pages/home.html", exercises=exercises)   
 
 
 # register and sign up page

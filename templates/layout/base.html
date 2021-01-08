@@ -4,13 +4,12 @@
     {% include 'layout/head.html' %}
 </head>
 <body>
-  {% include 'components/flash-messages.html %}
-  <main class="container">
-    <!-- block content -->
+  {% include 'components/flash-messages.html' %}
+  
     {% block content %} 
     {% endblock %}
-  </main>
-    {% include 'components/footer.html' %}
-    {% include 'layout/scripts.html' %}
+
+  {% include 'components/footer.html' %}
+  {% include 'layout/scripts.html' %}
 </body>
 </html>

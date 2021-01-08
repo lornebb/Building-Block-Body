@@ -1,10 +1,14 @@
 {% extends 'layout/base.html' %}
 {% block content %}
-{% include 'components/navigation/home-nav.html' %}
-<div class="parallax-container">
-    <div class="parallax"><img src="../static/images/young-woman-workout-at-home.jpg"></div>
-</div>
+    {% include 'components/nav-home.html' %}
+    <div class="parallax-container">
+        <div class="parallax"><img src="../static/images/young-woman-workout-at-home.jpg"></div>
+    </div>
 
-{% include 'components/all-exercises.html' %}
+    <div class="row">
+        <h6>You are not logged in, please register or log in.</h6>
+    </div>
+
+    {% include 'components/exercises-all.html' %}
 
 {% endblock %}
