@@ -8,13 +8,16 @@ $(document).ready(function () {
   $("#copyright").text(new Date().getFullYear());
   $("#contact-form-fail").hide();
   $("#contact-form-confirmation").hide();
+  $("#message-sending-spinner").hide();
 });
 
 $("#contact-form-submit").click(function () {
+  $("#contact-form-submit").hide();
+  $("#message-sending-spinner").show();
   if ($("#contact-message").val() == "") {
-    $("#contact-form-fail").show();
+    $("#message-sending-spinner").hide();
+    alert("Message is empty. Please write something.");
   } else {
-    $("#contact-form-confirmation").show();
     sendMail();
     return false;
   }
@@ -32,7 +35,10 @@ function sendMail() {
   };
   emailjs.send("lorneashley_gmail_com", "work_it_out", templateParams).then(
     function (response) {
+      $("#message-sending-spinner").hide();
       $("#contact-form-confirmation").show();
+      alert("message sent")
+      // $("#contact-form-confirmation").show();
     },
     function (error) {
       alert("message not sent, please try again");
