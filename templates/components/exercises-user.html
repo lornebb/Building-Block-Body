@@ -1,6 +1,7 @@
 {% for userexercises in exercises %}
-    {% if session.user == userexercises.user %}
 
+    {% if session.user == userexercises.user %}
+    
     <div class="col s12 m6">
         <div class="card">
             <!-- cycle through images for correct  -->
@@ -35,6 +36,7 @@
             </div>
         </div>
     </div>
-    
+
     {% endif %}
+
 {% endfor %}

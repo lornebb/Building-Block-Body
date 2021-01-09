@@ -1,0 +1,35 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <form class="col s12 m6 offset-m3" method="POST">
+            <div class="card-panel">
+                <div class="row center-align">
+                    <h5> Get in touch. </h5>
+                </div>
+                <div class="row center-align">
+                    <div class="input-field col s10 offset-s1">
+                        <input type="text" id="user" value="username: {{ session.user }}" name="contact email"
+                            aria-label="email contact box user" required disabled>
+                        <input type="text" id="contact-message" placeholder="Get in touch!" name="contact-message"
+                            aria-label="email contact box message" required>
+                        <a class="waves-effect waves-light btn-large" id="contact-form-submit" type="submit" href=""><i class="material-icons right">email</i>Send</a>
+                    </div>
+                </div>
+                <div class="row center-align">
+                    <div>
+                        <div id="contact-form-confirmation">Message Sent Successfully.</div>
+                    </div>
+                </div>
+                <div class="row center-align">
+                    <div>
+                        <div id="contact-form-fail">Field is empty. Please write something to send.</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>  
+</div>
+
+{% endblock %}

@@ -169,6 +169,15 @@ def edit_exercise(exercise_id):
     return render_template("pages/edit-exercise.html", exercise=exercise, category_name=category_name)
 
 
+@app.route("/contact")
+def contact():
+    '''
+    renders a contact page, then on submission send email to developer
+    via emailJS api
+    '''
+    return render_template("pages/contact.html")
+
+
 @app.route("/delete/<exercise_id>")
 def delete_exercise(exercise_id):
     '''
