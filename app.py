@@ -186,8 +186,11 @@ def add_to_workout(exercise_id):
     will add exercise to users workout list
     by adding exercise _id to an array in user in database
     '''
+    # mongo.db.users.find_one_and_update(
+    #     {"username": session["user"].lower()},
+    #     {"$push": {"workout": ObjectId(exercise_id)}})
     user = mongo.db.users
-    current_user = user.find_one({ "user": session["user"].lower() })
+    current_user = user.find_one({ "username": session["user"].lower() })
     user.find_one_and_update(current_user, { "$push": {"workout": ObjectId(exercise_id)}})
     flash("Exercise added to your workout list.")
     return redirect(url_for("profile"))
