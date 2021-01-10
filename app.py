@@ -103,8 +103,8 @@ def profile():
         {"username": session["user"]})["username"]
     
     if session["user"]:
-        exercises = mongo.db.exercises.find()
-        return render_template("pages/profile.html", username=username, exercises=exercises)
+        userexercises = mongo.db.exercises.find({ "user": username })
+        return render_template("pages/profile.html", username=username, userexercises=userexercises)
 
     return redirect(url_for("login"))
 
@@ -121,7 +121,7 @@ def logout():
 
 
 @app.route("/add-exercise", methods=["GET", "POST"])
-def add_new():
+def add_new_exercise():
     '''
     Will render add new exercise page, and show form to create
     a new exercise and post that data to the database. Also shows
@@ -169,15 +169,6 @@ def edit_exercise(exercise_id):
     return render_template("pages/edit-exercise.html", exercise=exercise, category_name=category_name)
 
 
-@app.route("/contact")
-def contact():
-    '''
-    renders a contact page, then on submission send email to developer
-    via emailJS api
-    '''
-    return render_template("pages/contact.html")
-
-
 @app.route("/delete/<exercise_id>")
 def delete_exercise(exercise_id):
     '''
@@ -186,6 +177,28 @@ def delete_exercise(exercise_id):
     mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
     flash("Exercise deleted.")
     return redirect(url_for("profile"))
+
+
+@app.route("/workout_add/<exercise_id>")
+def add_to_workout(exercise_id):
+    '''
+    will add exercise to users workout list
+    by adding exercise _id to array in user in database
+    '''
+    user = mongo.db.users
+    current_exercise = user.find_one({ "user": session["user"].lower() })
+    mongo.db.users.update(current_exercise, { "$push": { "workout": ObjectId(exercise_id)}})
+    flash("Exercise added to your workout list.")
+    return redirect(url_for("profile"))
+
+
+@app.route("/contact")
+def contact():
+    '''
+    renders a contact page, then on submission send email to developer
+    via emailJS api
+    '''
+    return render_template("pages/contact.html")
 
 
 if __name__ == "__main__":
