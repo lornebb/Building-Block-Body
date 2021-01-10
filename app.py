@@ -54,7 +54,7 @@ def register():
 
         session["user"] = request.form.get("username").lower()
         flash("Success! You are now registered.")
-        return render_template("pages/profile.html", session["user"])
+        return render_template("pages/profile.html", username=session["user"])
 
     return render_template("pages/register.html")
 
@@ -101,10 +101,10 @@ def profile():
     '''
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    
-    if session["user"]:
+
+    if username:
         userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/profile.html", username=username, userexercises=userexercises)
+        return render_template("pages/profile.html", username=username, userexercises=list(userexercises))
 
     return redirect(url_for("login"))
 
