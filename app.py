@@ -172,7 +172,8 @@ def edit_exercise(exercise_id):
 @app.route("/delete/<exercise_id>")
 def delete_exercise(exercise_id):
     '''
-    will delete exercise
+    will delete exercise from database and return user to 
+    their profile page, with a flash message to confirm.
     '''
     mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
     flash("Exercise deleted.")
@@ -183,11 +184,11 @@ def delete_exercise(exercise_id):
 def add_to_workout(exercise_id):
     '''
     will add exercise to users workout list
-    by adding exercise _id to array in user in database
+    by adding exercise _id to an array in user in database
     '''
     user = mongo.db.users
-    current_exercise = user.find_one({ "user": session["user"].lower() })
-    mongo.db.users.update(current_exercise, { "$push": { "workout": ObjectId(exercise_id)}})
+    current_user = user.find_one({ "user": session["user"].lower() })
+    user.find_one_and_update(current_user, { "$push": {"workout": ObjectId(exercise_id)}})
     flash("Exercise added to your workout list.")
     return redirect(url_for("profile"))
 
