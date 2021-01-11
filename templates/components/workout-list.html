@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="center-align"><h5>Your workout:</h5></div>
+</div>
+<div class="row">
+    <div class="col s12 m6 offset-m3">
+        <div class="card">
+            <div class="card-content center-align flow-text">
+                {% for exercise in workout_exercises %}
+                    <h6>{{ exercise.exercise_name }}</h6>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="center-align">
+            <a class="waves-effect waves-light btn"><i class="material-icons right">create</i>edit</a>
+        </div>
+    </div>
+</div>

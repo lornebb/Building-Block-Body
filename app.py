@@ -29,6 +29,42 @@ def home():
     return render_template("pages/home.html", exercises=exercises)   
 
 
+# landing page
+@app.route("/home-loggedin")
+def home_logged_in():
+    '''
+    This function loads the home landing page, displays all exercises,
+    and will allow logged in users to see which ones are already in their 
+    workout, and allow them to add / remove exercises.
+    '''
+    exercises = mongo.db.exercises.find()
+
+    username = mongo.db.users.find_one({"username": session["user"]})["username"]
+    
+    if username:
+        current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
+        current_user_workout = current_user_obj['workout']
+        workout_exercises = []
+        workout_exercise_id = []
+
+        if len(current_user_workout) != 0:
+            for exercise in current_user_workout:
+                current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+                current_exercise_id = current_exercise['_id']
+                workout_exercise_id.append(current_exercise_id)
+    
+        for exercise in current_user_workout:
+            current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+            workout_exercises.append(current_exercise)
+
+        userexercises = mongo.db.exercises.find({ "user": username })
+        return render_template("pages/home.html", username=username, exercises=exercises, userexercises=list(userexercises),
+                                workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
+    
+    else:
+        return render_template("pages/home.html", exercises=exercises)
+
+
 # register and sign up page
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -48,7 +84,8 @@ def register():
         # posts new user details to database, hashes password.
         register = {
             "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password")),
+            "workout": []
         }
         mongo.db.users.insert_one(register)
 
@@ -101,10 +138,26 @@ def profile():
     '''
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    
+    current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
+    current_user_workout = current_user_obj['workout']
+    workout_exercises = []
+    workout_exercise_id = []
+
+    if len(current_user_workout) != 0:
+        for exercise in current_user_workout:
+            current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+            current_exercise_id = current_exercise['_id']
+            workout_exercise_id.append(current_exercise_id)
+    
+    for exercise in current_user_workout:
+        current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+        workout_exercises.append(current_exercise)
 
     if username:
         userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/profile.html", username=username, userexercises=list(userexercises))
+        return render_template("pages/profile.html", username=username, userexercises=list(userexercises),
+                                workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
 
     return redirect(url_for("login"))
 
@@ -193,6 +246,18 @@ def add_to_workout(exercise_id):
     current_user = user.find_one({ "username": session["user"].lower() })
     user.find_one_and_update(current_user, { "$push": {"workout": ObjectId(exercise_id)}})
     flash("Exercise added to your workout list.")
+    return redirect(url_for("profile"))
+
+
+@app.route("/workout_remove/<exercise_id>")
+def remove_from_workout(exercise_id):
+    '''
+    will remove exercise from workout list by
+    taking the _id out of the users workout array
+    '''
+    user = mongo.db.users
+    current_user = user.find_one({ "username": session["user"].lower() })
+    user.update(current_user, { "$pull": {"workout": ObjectId(exercise_id)}})
     return redirect(url_for("profile"))
 
 
