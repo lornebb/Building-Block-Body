@@ -7,6 +7,9 @@
             <div class="card-panel">
                 <div class="row center-align"><h4>Log In</h4></div>
                 <div class="row center-align">Already have an account? Log In below.</div>
+                <div class="row center-align">
+                    <a href="{{ url_for('register') }}"><p>Don't have an acount? Register</p></a>
+                </div>  
                 <!-- username -->
                 <div class="row">
 					<div class="input-field col s10 offset-s1">
@@ -31,10 +34,4 @@
         </form>
     </div>
 </div>
-<div class="col">
-    <div class="row center-align">
-        <a href="{{ url_for('register') }}">STYLE ME - <h2>REGISTER</h2></a>
-    </div>
-</div>
-
 {% endblock %}

@@ -4,7 +4,7 @@
     {% include 'layout/head.html' %}
 </head>
 <body>
-
+<main>
   {% if session.user %}
       {% include 'components/nav-loggedin.html' %}
     {% else %}
@@ -15,8 +15,10 @@
   
     {% block content %} 
     {% endblock %}
-
+</main>
+<footer class="page-footer">
   {% include 'components/footer.html' %}
+</footer>
   {% include 'layout/scripts.html' %}
 </body>
 </html>
