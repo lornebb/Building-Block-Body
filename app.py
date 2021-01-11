@@ -270,6 +270,39 @@ def contact():
     return render_template("pages/contact.html")
 
 
+@app.errorhandler(404)
+def not_found(error):
+    '''
+    Will catch 404 error for when a Page is not found and 
+    render error page to display error to user with a redirect 
+    to home.
+    '''
+    error_code = str(error)
+    return render_template("pages/not_found.html", error_code=error_code), 404
+
+
+@app.errorhandler(400)
+def bad_request(error):
+    '''
+    Will catch 400 error for when a bad request occurs and 
+    render error page to display error to user with a redirect 
+    to home.
+    '''
+    error_code = str(error)
+    return render_template("pages/not_found.html", error_code=error_code), 400
+
+
+@app.errorhandler(500)
+def server_error(error):
+    '''
+    Will catch 500 error for when an internal server error occurs and 
+    render error page to display error to user with a redirect 
+    to home.
+    '''
+    error_code = str(error)
+    return render_template("pages/not_found.html", error_code=error_code), 500
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

@@ -1,15 +1,23 @@
-<div class="row">
-    <div class="center-align"><h5>Your workout:</h5></div>
-</div>
-<div class="row">
-    <div class="col s12 m6 offset-m3">
-        <div class="card">
-            <div class="card-content center-align flow-text">
-                {% for exercise in workout_exercises %}
-                    <h6>{{ exercise.exercise_name }}</h6>
-                {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="center-align"><h5>Your workout:</h5></div>
+    </div>
+    <div class="row">
+        {% for exercise in workout_exercises %}
+            <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{ exercise.exercise_name }}</span>
+                        <p>{{ exercise.instruction }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}">Remove</a>
+                    </div>
+                </div>
             </div>
-        </div>
+        {% endfor %}
+    </div>
+    <div class="row">    
         <div class="center-align">
             <a class="waves-effect waves-light btn"><i class="material-icons right">create</i>edit</a>
         </div>
