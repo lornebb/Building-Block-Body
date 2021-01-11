@@ -233,6 +233,36 @@ def delete_exercise(exercise_id):
     return redirect(url_for("profile"))
 
 
+@app.route("/workout")
+def workout():
+    '''
+    renders workout page etc etc
+    '''
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    
+    current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
+    current_user_workout = current_user_obj['workout']
+    workout_exercises = []
+    workout_exercise_id = []
+
+    if len(current_user_workout) != 0:
+        for exercise in current_user_workout:
+            current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+            current_exercise_id = current_exercise['_id']
+            workout_exercise_id.append(current_exercise_id)
+    
+    for exercise in current_user_workout:
+        current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+        workout_exercises.append(current_exercise)
+
+    if username:
+        userexercises = mongo.db.exercises.find({ "user": username })
+        return render_template("pages/workout.html", username=username, userexercises=list(userexercises),
+                                workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
+    return render_template("pages/workout.html")
+
+
 @app.route("/workout_add/<exercise_id>")
 def add_to_workout(exercise_id):
     '''
@@ -246,7 +276,7 @@ def add_to_workout(exercise_id):
     current_user = user.find_one({ "username": session["user"].lower() })
     user.find_one_and_update(current_user, { "$push": {"workout": ObjectId(exercise_id)}})
     flash("Exercise added to your workout list.")
-    return redirect(url_for("profile"))
+    return redirect(url_for("workout"))
 
 
 @app.route("/workout_remove/<exercise_id>")
@@ -258,7 +288,8 @@ def remove_from_workout(exercise_id):
     user = mongo.db.users
     current_user = user.find_one({ "username": session["user"].lower() })
     user.update(current_user, { "$pull": {"workout": ObjectId(exercise_id)}})
-    return redirect(url_for("profile"))
+    flash("Exercise removed from your workout")
+    return redirect(url_for("workout"))
 
 
 @app.route("/contact")
