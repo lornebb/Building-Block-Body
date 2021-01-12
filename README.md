@@ -38,6 +38,7 @@ The primary goal of this project is to allow users to create, view, store, arran
 * As a user, I would like to add exercises from a library into a workout for my day.
 * As a user, I want to return to the site and still have my exercises available.
 * As a user, I want a free workout service.
+* As a user, I want to be able to send messages to the developer to report bugs or problems with the site with a view to getting them fixed.
 
 ### Developer Goals
 
@@ -227,11 +228,47 @@ The plan is to create a page that, upon arrival, users can choose a username and
 
 #### **Implimentation**
 
-I created a log in and registration script that takes the information from the log in and registration form
+I created a registration script that takes the information from the registration form and creates a user in the database using that text. The passwords sent need to not be in clear text, so they are salted using Werkzeug and passed to the database. I have no ability to see user passwords. Once this user is created in the database, they are redirected to their new profile page, which will return the feedback to the user that they have not submitted any workouts yet, and if they checked their workout page, that would also be empty. Both pages will show a "get started"-type box with links to the Add Exercise or All Exercises pages respectively so they can get started with building their profile.
 
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
+#### **Test**
+
+1. Register on site:
+    1. Select the "Register" option in the navbar.
+    2. Try to submit the empty form and verify that an error message about the required fields appears.
+    3. Try to submit the form with less than 5 alphanumeric characters as the username.
+    4. Try to submit the form with less than 5 alphanumeric chatacters as the password.
+    5. Try to submit the form with all inputs valid and verify that a success message appears and you are redirected to the profile page.
+    6. Profile page should greet you by your username and show no exercises. A call to action button to add yoru first exercise should appear.
+
+
+### Login
+
+> As a user, I want to be able to log in after registration and see my account and previously submitted exercise data.
+> As a user, I want to return to the site and still have my exercises available.
+
+### Create Exercise
+
+> As a user, I would like to be able to name my own exercises.
+> As a user, I would like to be able to make my own exercise instruction.
+> As a user, I would like to provide details for other people about my exercise like est time and perceived difficulty.
+
+### Delete Exercise
+
+> As a user, I would like to be able to delete exercises I have made.
+
+### Add to Workout
+
+> As a user, I would like to add exercises from a library into a workout for my day.
+
+### Contact
+
+> As a user, I want to be able to send messages to the developer to report bugs or problems with the site with a view to getting them fixed.
+
+### FOR LOG IN INFO
+
+1. Register on site:
+    1. Select the "Register" or "Log In" options in the navbar.
+    2. Try to submit the empty form and verify that an error message about the required fields appears.
     3. Try to submit the form with an invalid email address and verify that a relevant error message appears
     4. Try to submit the form with all inputs valid and verify that a success message appears.
 
