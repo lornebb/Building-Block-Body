@@ -7,6 +7,7 @@ $(document).ready(function () {
   $("#contact-form-fail").hide();
   $("#contact-form-confirmation").hide();
   $("#message-sending-spinner").hide();
+  $('.tooltipped').tooltip();
 });
 
 $("#contact-form-submit").click(function () {

@@ -23,9 +23,9 @@
                         
                         <!-- add to workout button -->
                         {% if exercise._id in workout_exercise_id %}
-                            <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">check</i></a>
+                            <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light greentooltipped" data-position="right" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
                         {% else %}
-                            <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                            <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="right" data-tooltip="Add to workout""><i class="material-icons">add</i></a>
                         {% endif %}
 
                     </div>
