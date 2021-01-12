@@ -15,9 +15,9 @@
   <!-- mobile nav -->
   <ul class="right sidenav" id="mobile-menu">
     <li><a href="{{ url_for('home') }}"><h4 class="center-align">Work It Out</h4></a></li>
-    <li><a href="">Home</a></li>
+    <li><a href="{{ url_for('home_logged_in') }}">All Exercises</a></li>
     <li><a href="{{ url_for('profile') }}">Profile</a></li>
-    <li><a href="#!">Workout</a></li>
+    <li><a href="{{ url_for('workout') }}">Workout</a></li>
     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
   </ul> 
 </header>
