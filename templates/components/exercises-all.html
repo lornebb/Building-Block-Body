@@ -4,7 +4,7 @@
         {% for exercise in exercises %}
         <div class="col s12 m6">
             <div class="card">
-                <!-- cycle through images for correct  -->
+                <!-- cycle through images for correct to match body target AND FAB buttons for adding to workout list  -->
                 <div class="card-image">
                     {% if exercise.body_target|lower == "upper body" %}
                         <img src="{{ url_for('static', filename='images/body-target-imgs/upperbody.jpg') }}" >
@@ -17,11 +17,13 @@
                     {% endif %}
                     <span class="card-title">{{ exercise.exercise_name }} - targets {{ exercise.body_target }}</span>
                     
-                    <!-- add to workout button -->
-                    {% if exercise._id in workout_exercise_id %}
-                        <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light green tooltipped" data-position="right" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
-                    {% else %}
-                        <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="right" data-tooltip="Add to workout""><i class="material-icons">add</i></a>
+                    {% if session.user %}
+                        <!-- add to workout button -->
+                        {% if exercise._id in workout_exercise_id %}
+                            <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light green tooltipped" data-position="right" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
+                        {% else %}
+                            <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="right" data-tooltip="Add to workout""><i class="material-icons">add</i></a>
+                        {% endif %}
                     {% endif %}
                 </div>
                 <!-- exercise instruction -->
