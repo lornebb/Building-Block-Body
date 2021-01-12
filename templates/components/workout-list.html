@@ -1,12 +1,13 @@
 <div class="container">
     <div class="row">
-        <div class="center-align"><h5>Your workout:</h5></div>
+        <div class="center-align"><h5><u>Your workout:</u></h5></div>
     </div>
     <div class="row">
         {% for exercise in workout_exercises %}
             <div class="col s12 m6">
-                <div class="card blue-grey darken-1">
+                <div class="card hoverable blue-grey">
                     <div class="card-content white-text">
+                        <blockquote><h6>{{ exercise.body_target }}</h6></blockquote>
                         <span class="card-title">{{ exercise.exercise_name }}</span>
                         <p>{{ exercise.instruction }}</p>
                     </div>

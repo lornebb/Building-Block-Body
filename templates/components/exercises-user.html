@@ -19,13 +19,13 @@
                         {% elif exercise.body_target|lower == "abdominals" %}
                             <img src="{{ url_for('static', filename='images/body-target-imgs/abs.jpg') }}">
                         {% endif %}
-                        <span class="card-title">{{ exercise.exercise_name }} - targets {{ exercise.body_target }}</span>
+                        <span class="card-title">{{ exercise.exercise_name }}</span>
                         
                         <!-- add to workout button -->
                         {% if exercise._id in workout_exercise_id %}
-                            <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light greentooltipped" data-position="right" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
+                            <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-floating pulse halfway-fab waves-effect waves-light greentooltipped" data-position="right" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
                         {% else %}
-                            <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="right" data-tooltip="Add to workout""><i class="material-icons">add</i></a>
+                            <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-floating pulse halfway-fab waves-effect waves-light red tooltipped" data-position="right" data-tooltip="Add to workout""><i class="material-icons">add</i></a>
                         {% endif %}
 
                     </div>
@@ -36,6 +36,7 @@
                     <!-- difficulty and est time boxes -->
                     <div class="card-action center-align">
                         <div class="row center-align">
+                            <div class="card-panel center-align z-depth-3">Body Target: <br> {{ exercise.body_target }}</div>
                             <div class="waves-effect waves-light btn-small s12"><i class="material-icons left">priority_high</i>{{ exercise.difficulty }} difficulty</div>
                             <div class="waves-effect waves-light btn-small s12"><i class="material-icons left">hourglass_top</i>{{ exercise.est_time }} mins</div>
                         </div>
