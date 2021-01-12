@@ -1,11 +1,15 @@
 <section>    
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-        {% for message in messages %}
-            <div class="row flashes">
-            <h4 class="center-align">{{ message }}</h4>
-            </div>
-        {% endfor %}
+            {% for message in messages %}
+                <div class="row">
+                    <div class="col m4 offset-m4">
+                        <div class="card-panel teal lighten-5 center-align z-depth-3">
+                            <span>{{ message }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         {% endif %}
     {% endwith %}
 </section>
