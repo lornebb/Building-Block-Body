@@ -33,11 +33,10 @@ The primary goal of this project is to allow users to create, view, store, arran
 * As a user, I want to be able to log in after registration and see my account and previously submitted exercise data.
 * As a user, I would like to be able to name my own exercises.
 * As a user, I would like to be able to make my own exercise instruction.
-* As a user, I would like to provide details for other people about my exercise like est time and percived difficulty.
+* As a user, I would like to provide details for other people about my exercise like estimated time and perceived difficulty.
+* As a user, I would like to be able to edit exercises I have made after they have been submitted.
 * As a user, I would like to be able to delete exercises I have made.
-* As a user, I would like to add exercises from a library into a workout for my day.
-* As a user, I want to return to the site and still have my exercises available.
-* As a user, I want a free workout service.
+* As a user, I would like to add exercises from a library into a workout for my day and change that workout the next day.
 * As a user, I want to be able to send messages to the developer to report bugs or problems with the site with a view to getting them fixed.
 
 ### Developer Goals
