@@ -219,6 +219,8 @@ Feature 1 - allows users X to achieve Y, by having them fill out Z
 
 * [SASS/SCSS](https://sass-lang.com/)
 
+* [EmailJS](https://www.emailjs.com/)
+
 ## Testing
 
 ### Register
@@ -249,6 +251,10 @@ I created a registration script that takes the information from the registration
     3. Attempt to register with same credentials again.
     4. Message should show that the username already exists.
 
+* **Verdict**
+
+The test works as planned and has therefore passed.
+
 ### Login
 
 > As a user, I want to be able to log in after registration and see my account and previously submitted exercise data.
@@ -268,6 +274,10 @@ I needed to make it as easy as possible to log in, so on site arrival, on the ho
     2. Try to submit the form with an incorrect username and verify that an error message appears saying that the details are incorrect.
     3. Try to submit the form with an incorrect password and verify that an error message appears saying that the details are incorrect.
     4. Try to submit the form with all correct details and verify that you are redirected to you prfoile page.
+
+* **Verdict**
+
+The test works as planned and has therefore passed.
 
 ### Create Exercise
 
@@ -305,6 +315,10 @@ The form is quite simple after that - the Exercise Name is limited to 20 charact
     9. Change difficulty setting if you wish to, or leave it at medium.
     10. Submit exercise to database and ensure that you are brought back to your profile with the new exercise in the database.
 
+* **Verdict**
+
+The test works as planned and has therefore passed.
+
 ### Edit Exercise
 
 > As a user, I would like to be able to edit exercises I have made after they have been submitted.
@@ -334,6 +348,10 @@ On the edit page, the data from the exercise will be present and available to ed
     5. Change est time and difficulty if desired.
     6. Click on edit exercise button and ensure that you are redirected back to profile page with your updated exercise visible.
 
+* **Verdict**
+
+The test works as planned and has therefore passed.
+
 ### Delete Exercise
 
 > As a user, I would like to be able to delete exercises I have made.
@@ -354,9 +372,13 @@ On the profile page there is a script for showing user exercises that cycles thr
             1. (Same applies for All Exercises page)
     2. On your chosen exercise that you have submitted, select the delete button. Ensure that you are redirected to your profile page and that the exercise no longer exists. Also ensure that you have a message telling you that the exercise has been deleted.
 
-### Add to Workout
+* **Verdict**
 
-> As a user, I would like to add exercises from a library into a workout for my day.
+The test works as planned and has therefore passed.
+
+### Add and remove from Workout
+
+> As a user, I would like to add exercises from a library into a workout for my day and change that workout the next day.
 
 * **Plan**
 
@@ -368,31 +390,84 @@ This was easier to do on the Profile page than on the All Exercises page as I ne
 
 The logic is that when there is a session cookie, it will check that users workoout array for exercise object ids and only display green ticks to those exercises that are found in the array, otherwise, show a red plus button. If there is no session cookie, then it will not display a button at all.
 
-This actually caused a massive bug that caused a 500 error - when an exercise was deleted that was still in a workout, none of the logic worked. I fixed this by adding extra logic that checks on delete if it is in any users array then deletes from there too.
+* **Bugs**
+
+This actually caused a massive bug that caused a consistant 500 error on any page afterwards (while logged in) - when an exercise was deleted that was still in a workout, none of the logic worked. I fixed this by adding extra logic that checks on delete if it is in any users array then deletes from there too.
 
 * **Test**
 
+1. Add to workout FROM profile page:
+    1. From profile page, if there are no exercises, create an exercise using the add new exercise button.
+    2. On exercise card, select the pulsing floating action button (the circular red pulsing button with a plus icon in it)
+        1. Check that toast notification appears informing you what the button does "Add to workout".
+    3. Check that you have been redirected to your workout page. Which should now include the exercise on it with a remove button at the bottom of the card.
+    4. To remove a workout from this list, select the remove button.
+    5. Ensure that you have stayed on the workout page.
+        1. If this was the only workout on the page, ensure that are you now seeing a "You haven't added anything to your workout" text with options to view all exercises.
+        2. If this wasn't the only exercise in your workout, ensure that you are still on your workout page and the other exercises on there are still present.
 
-### Contact
+* **Verdict**
+
+The test works as planned and has therefore passed.
+
+### Contact Us
 
 > As a user, I want to be able to send messages to the developer to report bugs or problems with the site with a view to getting them fixed.
 
 * **Plan**
 
+This was a featrure that I really wanted to include - giving users the ability to share feedback or ask questions directly will only help the growth of the project with finding out how people use or what features people want on the site.
+
+It had to be relatively easy to use and still display the correct feedback to users about what is happening in the send process.
+
 * **Implimentation**
+
+Originally the Contact Us page was totally open in the footer to all users, whether logged in or not. However, now it seemed to make more sense to allow this to only appear when a use was logged in, and is currently only accessible from Profile and the footer if logged in.
+
+I also passed the username into the contact form via the username field for a personal touch.
+
+I used EmailJS for the API and linked it via javascript. Originally I had message sent messages trigger on the send button, however, this proved to be too unfaithful to the process, so I put a loading animation in place until the call had been completed before showing either a success message or an error message.
 
 * **Test**
 
+1. Contact Us
+    1. From the profile page, scroll to bottom, select contact us button.
+        1. Alternatively, if signed in, from any page, scroll to footer and selecter contact us.
+    2. Ensure that you are seeing a Get in touch card on /contact page.
+    3. Ensure that it is your username passed into the field next to username:
+    4. Try to send an empty message and ensure that you are greeted by a message saying "Message is empty. Please write something.
+    5. Type message for developer.
+    6. Try to send message and ensure you are greeted with error message.
+    7. reenter your username in the security field incorrectly and submit.
+    8. Ensure that you are met with an error message that you have not passed security.
+    9. Reenter security by repeating your username and submit.
+    10. Ensure that you see a revolving loading symbol and, upon sucessful send, see a message sent message.
 
+* **Verdict**
 
+The test works as planned and has therefore passed.
 
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
+## Other noteable bugs during development
 
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
+### Profile render user exercises else seperate display
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+From early on I wanted to show only the users exercises on their profile page, however, if the user had not entered any exercises, I wanted to show some sort of 'get started' text.
+
+However, the logic I had to display this was to cycle through the exercies collection and if there is a match, display that, but if there isnt a match, then show 'get started'. This meant that for every exercise that wasn't made by the user, it would display the 'get started' text, which sometimes meant seeing it tens of times.
+
+My original fixes were to check if a variable existed or if the variable was a length, but kept getting a type error.
+
+After two days on Stack Overflow and several calls to tutors and peers my logic was eventually fixed to include a length check in the python, allowing me to make an else-if in jinja that checks length against 0 instead.
+
+This was fixed, and I learned something about logic along the way, too.
+
+### 500 error for workout/exercise delete
+
+AND one mentioned above
 
 ## Deployment
+
+Work It Out was developed on Visual Studio Code using git and GitHub to host the repositary.
 
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
 
