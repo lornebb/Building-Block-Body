@@ -33,7 +33,7 @@
                     <div class="card-content">
                         <p>{{ exercise.instruction }}</p>
                     </div>
-                    <!-- difficulty and est time boxes -->
+                    <!-- difficulty and est time boxes AND EDIT & DELETE -->
                     <div class="card-action center-align">
                         <div class="row center-align">
                             <div class="card-panel center-align z-depth-3">Body Target: <br> {{ exercise.body_target }}</div>
@@ -43,7 +43,18 @@
                         <!-- if user logged in, can edit and delete -->
                         {% if session.user|lower == exercise.user|lower %}
                             <a href="{{ url_for('edit_exercise', exercise_id=exercise._id) }}" class="btn-small">Edit</a>
-                            <a href="{{ url_for('delete_exercise', exercise_id=exercise._id) }}" class="btn-small red">Delete</a>
+                            <!-- <a href="{{ url_for('delete_exercise', exercise_id=exercise._id) }}" class="btn-small red">Delete</a> -->
+                            <button data-target="delete-modal" class="btn-small red modal-trigger">Delete</button>
+                            <!-- delete modal content -->
+                            <div id="delete-modal" class="modal">
+                                <div class="modal-content">
+                                <h4>Are you sure you want to delete?</h4>
+                                <!-- <p>A bunch of text</p> -->
+                                </div>
+                                <div class="modal-footer">
+                                <a href="{{ url_for('delete_exercise', exercise_id=exercise._id) }}" class="modal-close waves-effect waves-green btn-flat red white-text">Delete</a>
+                                </div>
+                            </div>
                         {% endif %}
                     </div>
                 </div>

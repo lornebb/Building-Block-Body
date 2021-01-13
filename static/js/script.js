@@ -8,6 +8,7 @@ $(document).ready(function () {
   $("#contact-form-confirmation").hide();
   $("#message-sending-spinner").hide();
   $('.tooltipped').tooltip();
+  $('.modal').modal();
 });
 
 $("#contact-form-submit").click(function () {
