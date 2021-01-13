@@ -21,7 +21,7 @@
         <div class="row">
             <div class="row">
                 <div class="input-field col s12 m6 offset-m3">
-                    <input placeholder="What do you call it?" id="exercise_name" name="exercise_name" type="text" class="validate" required>
+                    <input placeholder="What do you call it?" id="exercise_name" name="exercise_name" type="text" class="validate" minlength="5" maxlength="20" data-length="20" required>
                     <label for="first_name">Exercise Name</label>
                 </div>
             </div>
@@ -38,19 +38,20 @@
         <!-- estimated time -->
         <div class="row">
             <div class="input-field col s12 m6 offset-m3">
-                <input placeholder="est time between 1 - 5 mins" id="est_time" name="est_time" type="text" class="validate" minlength="1" maxlength="1" pattern="^{1, 5}$" required>
-                <label for="first_name">Est. Time 1 - 5 minutes</label>
+                <input placeholder="est time between 1 - 5 mins" id="est_time" name="est_time" type="text" class="validate" minlength="1" maxlength="1" required>
+                <label for="first_name">Est. Time 0 - 9 minutes</label>
             </div>
         </div>
         <!-- difficulty -->
         <div class="row">
             <div class="input-field col s12 m6 offset-m3">
-                <select value="difficulty" name="difficulty">
-                    <option disabled selected>Difficulty</option>
+                <select value="difficulty" name="difficulty" required>
+                    <!-- <option disabled selected>Add a Difficulty?</option> -->
                     <option >Easy</option>
-                    <option >Medium</option>
+                    <option selected >Medium</option>
                     <option >Hard</option>
                 </select>
+                <label for="difficulty">Add a Difficulty</label>
             </div>
         </div>
         <!-- submit new exercise -->
