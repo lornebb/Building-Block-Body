@@ -11,16 +11,20 @@ $(document).ready(function () {
 });
 
 $("#contact-form-submit").click(function () {
-  $("#contact-form-submit").hide();
-  $("#message-sending-spinner").show();
-  if ($("#contact-message").val() == "") {
-    $("#message-sending-spinner").hide();
-    alert("Message is empty. Please write something.");
+  if ($("#user").val() == $("#validation").val()) {
+    $("#contact-form-submit").hide();
+    $("#message-sending-spinner").show();
+    if ($("#contact-message").val() == "") {
+      $("#message-sending-spinner").hide();
+      alert("Message is empty. Please write something.");
+    } else {
+      sendMail();
+      return false;
+    }
   } else {
-    sendMail();
-    return false;
-  }
-});
+    alert("Validation was incorrect")
+    return false
+  }});
 
 /**
  * emailJS API - when submit on contact form is sent,
@@ -44,4 +48,5 @@ function sendMail() {
     }
   );
   return false;
+  
 }
