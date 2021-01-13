@@ -137,7 +137,7 @@ Workout | workout | Array
 Exercise Id | _id | ObjectId
 Exercise Name | exercise_name | String
 Body Target | body_target | String
-Estimate Time | est_time | String
+Estimate Time | est_time | Int32
 Difficulty | difficulty | String
 Instruction | instruction | String
 User | user | String

@@ -181,11 +181,14 @@ def add_new_exercise():
     only the body targets available in the database.
     '''
     if request.method == "POST":
+        est_time_input = request.form.get("est_time")
+        est_time = 9 if int(est_time_input) >= 9 else est_time_input
+
         exercise = {
             "body_target": request.form.get("body_target"),
             "exercise_name": request.form.get("exercise_name"),
             "instruction": request.form.get("instruction"),
-            "est_time": request.form.get("est_time"),
+            "est_time": est_time,
             "difficulty": request.form.get("difficulty"),
             "user": session["user"]
         }
@@ -203,13 +206,17 @@ def add_new_exercise():
 def edit_exercise(exercise_id):
     '''
     edit exercise
+    also makes sure that, defensively, an est time is always a maximum of 9.
     '''
     if request.method == "POST":
+        est_time_input = request.form.get("est_time")
+        est_time = 9 if int(est_time_input) >= 9 else est_time_input
+
         submit = {
             "body_target": request.form.get("body_target"),
             "exercise_name": request.form.get("exercise_name"),
             "instruction": request.form.get("instruction"),
-            "est_time": request.form.get("est_time"),
+            "est_time": est_time,
             "difficulty": request.form.get("difficulty"),
             "user": session["user"]
         }
