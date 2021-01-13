@@ -462,7 +462,11 @@ This was fixed, and I learned something about logic along the way, too.
 
 ### 500 error for workout/exercise delete
 
-AND one mentioned above
+the one mentioned above - FILL OUT
+
+### Bug with first exercise being edit and deletable!!!
+
+had no user id attached, must have been made ages ago etc.
 
 ## Deployment
 
