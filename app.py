@@ -234,8 +234,19 @@ def delete_exercise(exercise_id):
     '''
     will delete exercise from database and return user to 
     their profile page, with a flash message to confirm.
+    Will also remove itsself from any workout it might appear in.
     '''
     mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
+# WORK FROM HERE
+    users = mongo.db.users
+
+    # for user in users:
+    #     if exercise_id in user.workout[]:
+    #         user.remove({"_id": ObjectId(exercise_id)})
+    
+    def search_work_out()
+
+
     flash("Exercise deleted.")
     return redirect(url_for("profile"))
 
@@ -276,12 +287,9 @@ def add_to_workout(exercise_id):
     will add exercise to users workout list
     by adding exercise _id to an array in user in database
     '''
-    # mongo.db.users.find_one_and_update(
-    #     {"username": session["user"].lower()},
-    #     {"$push": {"workout": ObjectId(exercise_id)}})
-    user = mongo.db.users
-    current_user = user.find_one({ "username": session["user"].lower() })
-    user.find_one_and_update(current_user, { "$push": {"workout": ObjectId(exercise_id)}})
+    mongo.db.users.find_one_and_update(
+        {"username": session["user"].lower()},
+        {"$push": {"workout": ObjectId(exercise_id)}})
     flash("Exercise added to your workout list.")
     return redirect(url_for("workout"))
 
@@ -289,12 +297,13 @@ def add_to_workout(exercise_id):
 @app.route("/workout_remove/<exercise_id>")
 def remove_from_workout(exercise_id):
     '''
-    will remove exercise from workout list by
-    taking the _id out of the users workout array
+    will remove exercise from workout by taking the 
+    _id out of the users workout array in the database.
     '''
-    user = mongo.db.users
-    current_user = user.find_one({ "username": session["user"].lower() })
-    user.update(current_user, { "$pull": {"workout": ObjectId(exercise_id)}})
+    mongo.db.users.find_one_and_update(
+        {"username": session["user"].lower()},
+        {"$pull": {"workout": ObjectId(exercise_id)}})
+
     flash("Exercise removed from your workout")
     return redirect(url_for("workout"))
 
