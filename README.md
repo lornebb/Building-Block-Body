@@ -490,24 +490,147 @@ Eventually, this was fixed, and I learned a lot of bug squashing in python.
 
 Work It Out was developed on Visual Studio Code using git and GitHub to host the repositary.
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+### Cloning Work It Out from GitHub:
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+**Ensure** you have the following installed:
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+* PIP
+* Python 3
+* Git
 
+**Make** sure you have an account at [MongoDB](https://www.mongodb.com/) in order to create your own database.
+
+_WARNING: You may need to follow a different guide based on the OS you are using, read more [here](https://python.readthedocs.io/en/latest/library/venv.html)._
+
+* 1: **Clone** the Work It Out repository by either downloading from [here](https://github.com/lornebb/Building-Block-Body), or if you have Git installed typing the following command into your terminal.
+
+```bash
+git clone https://github.com/lornebb/Building-Block-Body
+```
+
+* 2: **Navigate** to this folder in your terminal.
+
+* 3: **Enter** the following command into your terminal:
+
+```bash
+python3 -m .venv venv
+```
+
+* 4: **Initilaize** the environment by using the following command.
+
+```bash
+.venv\bin\activate 
+```
+
+* 5: **Install** the relevant requirements & dependancies from the requirements.txt file.
+
+```bash
+pip3 -r requirements.txt
+```
+
+* 6: Sign-in or sign-up to [MongoDB](https://www.mongodb.com/) and create a new cluster.
+
+  * Click the collections button and then click Create Database (Add My Own Data) called Work_It_Out.
+
+  * Set up the relevent collections as highlighted above in [the collections THINGYMAJIG](#database-structure)
+
+  * Under the Security Menu on the left, select Database Access.
+  
+  * Add a new database user, and keep the credentials secure.
+  
+  * Within the Network Access option, add IP Address 0.0.0.0
+
+* 7: In your IDE, create a file containing your environmental variables called env.py at the root level of the application. It will need to contain the following lines and variables:
+
+    ```bash
+    import os
+
+    os.environ["IP"] = "0.0.0.0"
+    os.environ["PORT"] = "5000"
+    os.environ["SECRET_KEY"] = "YOUR_SECRET_KEY"
+    os.environ["DEBUG"] = "1"
+    os.environ["MONGO_URI"] = "YOUR_MONGODB_URI"
+    os.environ["MONGO_DBNAME"]= "DATABASE_NAME" 
+    ```
+
+    Please note that you will need to update the **SECRET_KEY** with your own secret key, as well as the **MONGO_URI** and **MONGO_DBNAME** variables with those provided by MongoDB.
+    
+  * Tip for your SECRET_KEY, you can use a [Password Generator](https://passwordsgenerator.net/) in order to have a secure secret key.
+
+  * To find your MONGO_URI, go to your clusters and click on connect. Choose connect your application and copy the link provided.
+
+  * Then update the necessary fields like password and database name.
+
+  * If you plan on pushing this application to a public repository, ensure that env.py is added to your .gitignore file.
+
+* 8: **Run** the application using:
+
+```bash
+flask run 
+```
+
+or
+
+```bash
+Python3 app.py
+```
+
+### Deploying Work It Out to Heroku
+
+1. Register or Login to your Heroku account and create a new app. Choose your region.
+
+1. Ensure the Procfile and requirements.txt files exist are present and up-to-date in your local repository.  
+
+    Requirements:
+
+    ```bash
+    pip3 freeze --local > requirements.txt
+    ```
+
+    Procfile:
+
+    ```bash
+    echo web: python app.py > Procfile
+    ```
+
+1. The Procfile should contain the following line:
+
+    ```bash
+    web: python app.py
+    ```
+
+1. Scroll down to "deployment method"-section. Choose "Github" for automatic deployment.
+
+1. From the inputs below, make sure your github user is selected, and then enter the name for your repo. Click "search". When it finds the repo, click the "connect" button.
+
+1. Scroll back up and click "settings". Scroll down and click "Reveal config vars". Set up the same variables as in your env.py (IP, PORT, SECRET_KEY, MONGO_URI and MONGODB_NAME):
+
+1. You shouldn't set the DEBUG variable under config vars, only in your env.py to prevent DEBUG being active on live website.
+
+    ```bash
+    IP = 0.0.0.0
+    PORT = 5000
+    SECRET_KEY = YOUR_SECRET_KEY
+    MONGO_URI = YOUR_MONGODB_URI
+    MONGO_DBNAME = DATABASE_NAME
+    ```
+
+1. Scroll back up and click "Deploy". Scroll down and click "Enable automatic deployment".
+
+1. Just beneath, click "Deploy branch". Heroku will now start building the app. When the build is complete, click "view app" to open it.
+
+1. In order to commit your changes to the branch, use git push to push your changes, which will automatically updatein Heroku thanks to "enable automatic deployment" from above.
 
 ## Credits
 
-### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+* The ultimate thanks have to go to the excellent team at Tutor Support at Code Institute who helped me deep into the night with bugs and helping me figure out logic, namely Tim, Michael and Johann. Their help was invaluable to getting this project finished.
 
-### Media
-- The photos used in this site were obtained from ...
+* The excellent testers that helped me find bugs such as the dreaded 500 bug for workouts - [Marc Høegh](https://www.linkedin.com/in/marchoegh/), [Roos Van Rossum](https://www.linkedin.com/in/roos-van-rossum-8b117b81/), [Toni Stait](https://www.tonetherapies.com/).
+
+* [Simen Daehlin](https://github.com/Eventyret) who always goes above and beyond to help me get my head around things.
+
+* When figuring out how to tackle error handling, [this article](https://hackersandslackers.com/flask-routes/) proved to be invaluable.
 
 ### Acknowledgements
 
-- I received inspiration for this project from X
+* I received inspiration for this project from my peers at Code Instsitute, namely [Anouk Smet](https://raw.githubusercontent.com/AnoukSmet) and [Geomint.](https://raw.githubusercontent.com/Geomint)
