@@ -460,13 +460,31 @@ After two days on Stack Overflow and several calls to tutors and peers my logic 
 
 This was fixed, and I learned something about logic along the way, too.
 
+### First exercise being edit and deletable.
+
+For some reason, every single time I logged out of a user, and went back to the home page, the first exercise in the list would show the edit and delete buttons, which are only supposed to show when a logged in user name matches an exercises created by username.
+
+This problem was so confusing to me, as the code I had written was not only sound, but was working for every other exercise in the database. So I tried changing the logic entirely from if username checks to creating a list from all exerciser named by and iterating over that instead, but it was still happening.
+
+For some reaosn I never thought to look at the database itself... if I had just looked there first, I would have seen that this particular exercise had no user id attached at all. It must have been made before I even added the feature. Very frustrating, however, taught me a valuable lesson in what to check for if errors occur again.
+
 ### 500 error for workout/exercise delete
 
-the one mentioned above - FILL OUT
+As mentioned above, the 500 error was extremely troublesome.
 
-### Bug with first exercise being edit and deletable!!!
+It happened when a user would delete an exercise that was in a workout, causing that user profile to fail to load in any view as there was an object id in a users field that lead to nowhere.
 
-had no user id attached, must have been made ages ago etc.
+There were two ways of fixing this:
+
+1. Reset the database entirely and write a 'cleanup' type script upon delete of an exercise.
+
+2. On profile page load, write a script to check if any ids dont match before trying to load the page by chasing the error back until I found a line where it would work.
+
+Option 2 seemed more appealing since it meant not having to reset the database, but after hours and hours of trying to chase the errors back to find a place to put this code in, it prooved completely unfruitful. However, I'm hoping that it's something I'll learn to do in the future because if I could have fixed it this way it would have provided yet another defensive element to the programme.
+
+I went to try option 2, which would work for testing the bug if I made a new user on each test. As once this error occured, it would render a user profile unusable unless deleting the workout in the database. After another few hours of getting 'NoneType' and 'Not Iterable' errors, I called up tutor support at Code Institute for help, and together we changed the fundamentals of the add_to_workout function, so that instead of adding ObjectId's to a users workout array, it added the string of the _id instead, which made the whole process much easier to deal with.
+
+Eventually, this was fixed, and I learned a lot of bug squashing in python.
 
 ## Deployment
 
