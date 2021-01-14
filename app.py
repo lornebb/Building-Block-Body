@@ -187,7 +187,7 @@ def add_new_exercise():
             return redirect(url_for("add_new_exercise"))
         
         exercise_instruction_input = request.form.get("instruction")
-        if len(exercise_instruction_input) >= 90:
+        if len(exercise_instruction_input) >= 91:
             flash("Intstruction is too long, max = 90 characters")
             return redirect(url_for("add_new_exercise"))
 
