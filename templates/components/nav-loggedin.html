@@ -9,6 +9,29 @@
           <li><a href="{{ url_for('profile') }}">Profile</a></li>
           <li><a href="{{ url_for('workout') }}">Workout</a></li>
           <a href="{{ url_for('logout') }}" class="waves-effect waves-light btn"><i class="material-icons right">directions_run</i>Log Out</a>
+          <!-- Help Modal -->
+          <a class="waves-effect waves-light btn modal-trigger yellow darken-2" href="#helpmodal"><i class="material-icons">help</i></a>
+          <!-- Help Modal Content -->
+          <div id="helpmodal" class="modal grey">
+            <div class="modal-content">
+              <h4 class="text-darken-5">Work It Out</h4>
+              <p class="flow-text">Stay healthy! Make your own workout! 
+                <br>
+                1. Register or Log In to make a profile.
+                <br>
+                2. From your profile you can <b>create an exercise.</b>
+                <br>
+                3. Browse all the exercises on the All Exercises page.
+                <br>
+                4. Add to your workout by using the red plus button.
+                <br>
+                5. Remove from workout using the green tick.
+              </p>
+            </div>
+            <div class="modal-footer grey lighten-1">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+          </div>
         </ul>
     </div>
   </nav>

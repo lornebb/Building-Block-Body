@@ -140,18 +140,13 @@ def profile():
         {"username": session["user"]})["username"]
     
     current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
-    print('*********************************')
-    print(current_user_obj)
     current_user_workout = current_user_obj['workout']
-    print(current_user_workout)
     workout_exercises = []
     workout_exercise_id = []
 
     if current_user_workout != []:
         for exercise in current_user_workout:
-            print(exercise)
             current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
-            print(current_exercise)
             current_exercise_id = current_exercise['_id']
             workout_exercise_id.append(current_exercise_id)
     
@@ -244,11 +239,7 @@ def delete_exercise(exercise_id):
 
     for user in list(users):
         if exercise_id in user['workout']:
-            print("************************************************")
-            print("************DELETE EXERCISE**************")
-            print(user['workout'])
             mongo.db.users.update({"_id": ObjectId(user['_id'])}, {"$pull": {"workout": exercise_id}})
-            print(user['workout'])
 
     mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
 
