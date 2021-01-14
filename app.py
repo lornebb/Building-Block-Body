@@ -18,24 +18,30 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# landing page
+# home page not logged in
 @app.route("/")
 def home():
     '''
-    This function loads the home landing page.
+    This function loads the home landing page. Gets all exercises 
+    from the database and sends them to the page to iterate over,
+    using variable exercises.
     '''
     exercises = mongo.db.exercises.find()
     
     return render_template("pages/home.html", exercises=exercises)   
 
 
-# landing page
+# home page logged in
 @app.route("/home-loggedin")
 def home_logged_in():
     '''
-    This function loads the home landing page, displays all exercises,
-    and will allow logged in users to see which ones are already in their 
-    workout, and allow them to add / remove exercises.
+    This function loads the home landing page, checks if there is a user logged in
+    then finds that users' workout array.
+    It checks if that array is empty or not, if it isn't empty, then it goes through
+    that array and populates the workout_exercises list to be passed to the page.
+    It also passes all the exercises to the page to iterate over, too.
+    These variables allow the page to show wether an exercise was made by
+    the logged in user or not, and show edit/delete options if so.
     '''
     exercises = mongo.db.exercises.find()
 
@@ -69,9 +75,11 @@ def home_logged_in():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     '''
-    Will render register page and handle account register 
-    and post user details into database or check to see if 
-    user already exists.
+    Will render register page and handle account register on POST.
+    This posts user details into database and check to see if 
+    user already exists - if username already exists it flashes
+    a message for the user to try and log in or try another username.
+    On password submission, hashes password using Werkeug.
     '''
     if request.method == "POST":
         # register form - checks if user is already in database.
@@ -99,8 +107,8 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     '''
-    Will render log in page and create session cookie
-    for user session.
+    Will render log in page and create session cookie for user session.
+    Also checks for if password matches with database, with messages for if incorrect.
     '''
     # log in form - checks if user is registered
     if request.method == "POST":
@@ -132,9 +140,11 @@ def login():
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     '''
-    Will render profile page and create exercise form. 
-    Allowing session user to add exercises to the database.
-    Will also take users username from database.
+    Will render profile page and create variables for page to use.
+    Username is passed for header text and to check through the 
+    user exercises list for matches so as to send only the users exercises to page.
+    Will also check against the users workout array for matches, so the page can 
+    correctly show what exercies are already in the users workout list.
     '''
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -166,7 +176,8 @@ def profile():
 @app.route("/logout")
 def logout():
     '''
-    will pop user session cookie out of memory
+    Will pop user session cookie out of memory, and return to
+    non-logged in home page.
     '''
     flash("You have been successfully logged out!")
     session.pop("user")
@@ -179,6 +190,8 @@ def add_new_exercise():
     Will render add new exercise page, and show form to create
     a new exercise and post that data to the database. Also shows
     only the body targets available in the database.
+    Some defensive paramters also included for if user changes html, such as
+    estimate time max value and title and instruction length.
     '''
     if request.method == "POST":
         exercise_name_input = request.form.get("exercise_name")
@@ -215,8 +228,12 @@ def add_new_exercise():
 @app.route("/edit_exercise/<exercise_id>", methods=["GET", "POST"])
 def edit_exercise(exercise_id):
     '''
-    edit exercise
-    also makes sure that, defensively, an est time is always a maximum of 9.
+    Will render edit exercise page, and show form to pre-populated with
+    current exercise.
+    Will post any data in form to the database, overwriting what was previously there.
+    Also shows only the body targets available in the database.
+    Some defensive paramters also included for if user changes html, such as
+    estimate time max value and title and instruction length.
     '''
     if request.method == "POST":
         exercise_name_input = request.form.get("exercise_name")
@@ -254,8 +271,11 @@ def edit_exercise(exercise_id):
 @app.route("/delete/<exercise_id>")
 def delete_exercise(exercise_id):
     '''
-    will delete exercise from database and return user to 
-    their profile page, with a flash message to confirm.
+    Will delete exercise from database and return user to 
+    their profile page, with a flash message to confirm using
+    exercise id to cross check correct exercise being deleted.
+    Also checks if the current exercise is in any users workout and
+    removes from their workout also to avoid loading errors for other users.
     '''
     users = mongo.db.users.find()
 
@@ -272,7 +292,8 @@ def delete_exercise(exercise_id):
 @app.route("/workout")
 def workout():
     '''
-    renders workout page etc etc
+    Will render workout page, checking user workout array against the 
+    exercise collection to show the correct data.
     '''
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -302,8 +323,8 @@ def workout():
 @app.route("/workout_add/<exercise_id>")
 def add_to_workout(exercise_id):
     '''
-    will add exercise to users workout list
-    by adding exercise _id to an array in user in database
+    Adds exercise to users workout list by pushing 
+    exercise _id string to a workout array in user in database.
     '''
     mongo.db.users.find_one_and_update(
         {"username": session["user"].lower()},
@@ -315,8 +336,8 @@ def add_to_workout(exercise_id):
 @app.route("/workout_remove/<exercise_id>")
 def remove_from_workout(exercise_id):
     '''
-    will remove exercise from workout by taking the 
-    _id out of the users workout array in the database.
+    Removes exercise from workout by taking the id string 
+    out of the users workout array in the database.
     '''
     mongo.db.users.find_one_and_update(
         {"username": session["user"].lower()},
@@ -329,8 +350,7 @@ def remove_from_workout(exercise_id):
 @app.route("/contact")
 def contact():
     '''
-    renders a contact page, then on submission send email to developer
-    via emailJS api
+    Renders a contact page.
     '''
     return render_template("pages/contact.html")
 
