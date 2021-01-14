@@ -11,6 +11,7 @@ $(document).ready(function () {
   $('.modal').modal();
 });
 
+// Contact form on click to fire sendmail()
 $("#contact-form-submit").click(function () {
   if ($("#user").val() == $("#validation").val()) {
     $("#contact-form-submit").hide();
@@ -49,5 +50,4 @@ function sendMail() {
     }
   );
   return false;
-  
-}
+};
