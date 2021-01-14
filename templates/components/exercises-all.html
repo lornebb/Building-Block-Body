@@ -4,7 +4,7 @@
         {% for exercise in exercises %}
         <div class="col s12 m4">
             <div class="card medium">
-                <!-- cycle through images for correct to match body target AND FAB buttons for adding to workout list  -->
+                <!-- cycle through images for correct to match body target -->
                 <div class="card-image">
                     {% if exercise.body_target|lower == "upper body" %}
                         <img src="{{ url_for('static', filename='images/body-target-imgs/upperbody.jpg') }}" >
@@ -15,8 +15,7 @@
                     {% elif exercise.body_target|lower == "abdominals" %}
                         <img src="{{ url_for('static', filename='images/body-target-imgs/abs.jpg') }}">
                     {% endif %}
-                    <span class="card-title">{{ exercise.exercise_name }}</span> 
-                    
+                    <span class="card-title">{{ exercise.exercise_name }}</span>   
                 </div>
                 <!-- exercise instruction -->
                 <div class="card-content">
@@ -29,9 +28,9 @@
                 <div class="card-action center-align">
                     <!-- add to workout button -->
                     {% if exercise._id in workout_exercise_id %}
-                        <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-small pulse halfway-fab waves-effect waves-light green tooltipped" data-position="left" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
+                        <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light green tooltipped" data-position="left" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
                     {% else %}
-                        <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-small pulse halfway-fab waves-effect waves-light grey lighten-1 tooltipped" data-position="left" data-tooltip="Add to workout"><i class="material-icons">add</i></a>
+                        <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light grey lighten-1 tooltipped" data-position="left" data-tooltip="Add to workout"><i class="material-icons">add</i></a>
                     {% endif %}
                 {% endif %}
                 {% if session.user|lower == exercise.user|lower %}
