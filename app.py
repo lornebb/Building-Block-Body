@@ -49,7 +49,7 @@ def home_logged_in():
 
         if len(current_user_workout) != 0:
             for exercise in current_user_workout:
-                current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+                current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
                 current_exercise_id = current_exercise['_id']
                 workout_exercise_id.append(current_exercise_id)
     
