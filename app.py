@@ -140,13 +140,18 @@ def profile():
         {"username": session["user"]})["username"]
     
     current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
+    print('*********************************')
+    print(current_user_obj)
     current_user_workout = current_user_obj['workout']
+    print(current_user_workout)
     workout_exercises = []
     workout_exercise_id = []
 
-    if len(current_user_workout) != 0:
+    if current_user_workout != []:
         for exercise in current_user_workout:
-            current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+            print(exercise)
+            current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
+            print(current_exercise)
             current_exercise_id = current_exercise['_id']
             workout_exercise_id.append(current_exercise_id)
     
@@ -234,18 +239,18 @@ def delete_exercise(exercise_id):
     '''
     will delete exercise from database and return user to 
     their profile page, with a flash message to confirm.
-    Will also remove itsself from any workout it might appear in.
     '''
+    users = mongo.db.users.find()
+
+    for user in list(users):
+        if exercise_id in user['workout']:
+            print("************************************************")
+            print("************DELETE EXERCISE**************")
+            print(user['workout'])
+            mongo.db.users.update({"_id": ObjectId(user['_id'])}, {"$pull": {"workout": exercise_id}})
+            print(user['workout'])
+
     mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
-# WORK FROM HERE
-    users = mongo.db.users
-
-    # for user in users:
-    #     if exercise_id in user.workout[]:
-    #         user.remove({"_id": ObjectId(exercise_id)})
-    
-    def search_work_out()
-
 
     flash("Exercise deleted.")
     return redirect(url_for("profile"))
@@ -266,12 +271,12 @@ def workout():
 
     if len(current_user_workout) != 0:
         for exercise in current_user_workout:
-            current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+            current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
             current_exercise_id = current_exercise['_id']
             workout_exercise_id.append(current_exercise_id)
     
     for exercise in current_user_workout:
-        current_exercise = mongo.db.exercises.find_one({'_id': exercise})
+        current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
         workout_exercises.append(current_exercise)
 
     if username:
@@ -289,7 +294,7 @@ def add_to_workout(exercise_id):
     '''
     mongo.db.users.find_one_and_update(
         {"username": session["user"].lower()},
-        {"$push": {"workout": ObjectId(exercise_id)}})
+        {"$push": {"workout": exercise_id}})
     flash("Exercise added to your workout list.")
     return redirect(url_for("workout"))
 
@@ -302,7 +307,7 @@ def remove_from_workout(exercise_id):
     '''
     mongo.db.users.find_one_and_update(
         {"username": session["user"].lower()},
-        {"$pull": {"workout": ObjectId(exercise_id)}})
+        {"$pull": {"workout": exercise_id}})
 
     flash("Exercise removed from your workout")
     return redirect(url_for("workout"))
