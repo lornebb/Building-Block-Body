@@ -224,9 +224,11 @@ def edit_exercise(exercise_id):
         flash("Exercise updated successfully")
         return redirect(url_for("profile"))
     
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
     exercise = mongo.db.exercises.find_one({"_id": ObjectId(exercise_id)})
-    category_name = mongo.db.exercises.find().sort("body_target", 1)
-    return render_template("pages/edit-exercise.html", exercise=exercise, category_name=category_name)
+    category_name = mongo.db.target_category.find().sort("body_target", 1)
+    return render_template("pages/edit-exercise.html", username=username, exercise=exercise, category_name=category_name)
 
 
 @app.route("/delete/<exercise_id>")
