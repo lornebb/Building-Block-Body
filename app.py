@@ -181,13 +181,23 @@ def add_new_exercise():
     only the body targets available in the database.
     '''
     if request.method == "POST":
+        exercise_name_input = request.form.get("exercise_name")
+        if len(exercise_name_input) >= 21:
+            flash("Title is too long, max = 20 characters")
+            return redirect(url_for("add_new_exercise"))
+        
+        exercise_instruction_input = request.form.get("instruction")
+        if len(exercise_instruction_input) >= 90:
+            flash("Intstruction is too long, max = 90 characters")
+            return redirect(url_for("add_new_exercise"))
+
         est_time_input = request.form.get("est_time")
         est_time = 9 if int(est_time_input) >= 9 else est_time_input
 
         exercise = {
             "body_target": request.form.get("body_target"),
-            "exercise_name": request.form.get("exercise_name"),
-            "instruction": request.form.get("instruction"),
+            "exercise_name": exercise_name_input,
+            "instruction": exercise_instruction_input,
             "est_time": est_time,
             "difficulty": request.form.get("difficulty"),
             "user": session["user"]
