@@ -118,7 +118,7 @@ Since this was my first attempt at using databases in web development, I created
 
 **Name** |**Key** | **Value**
 :-:|:-:|:-:
-_id | _id | ObjectId
+_id |_id | ObjectId
 Body Target | body_target | String
 
 ##### Users Collection
@@ -460,7 +460,7 @@ After two days on Stack Overflow and several calls to tutors and peers my logic 
 
 This was fixed, and I learned something about logic along the way, too.
 
-### First exercise being edit and deletable.
+### First exercise being edit and deletable
 
 For some reason, every single time I logged out of a user, and went back to the home page, the first exercise in the list would show the edit and delete buttons, which are only supposed to show when a logged in user name matches an exercises created by username.
 
@@ -490,7 +490,7 @@ Eventually, this was fixed, and I learned a lot of bug squashing in python.
 
 Work It Out was developed on Visual Studio Code using git and GitHub to host the repositary.
 
-### Cloning Work It Out from GitHub:
+### Cloning Work It Out from GitHub
 
 **Ensure** you have the following installed:
 
@@ -554,7 +554,7 @@ pip3 -r requirements.txt
     ```
 
     Please note that you will need to update the **SECRET_KEY** with your own secret key, as well as the **MONGO_URI** and **MONGO_DBNAME** variables with those provided by MongoDB.
-    
+
   * Tip for your SECRET_KEY, you can use a [Password Generator](https://passwordsgenerator.net/) in order to have a secure secret key.
 
   * To find your MONGO_URI, go to your clusters and click on connect. Choose connect your application and copy the link provided.
