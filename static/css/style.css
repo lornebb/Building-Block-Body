@@ -22,14 +22,3 @@ main {
 .page-footer-row {
     margin-bottom: 0px;;
 }
-
-/* card and fab z index fix */
-
-.card.medium .card-image {
-  max-height: 40%;
-  overflow: inherit;
-}
-
-.card-image{
-  min-height: 200px;
-}
