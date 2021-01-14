@@ -13,8 +13,8 @@
             </div>
             <!-- body_target selection -->
             <div class="input-field col s12 m2">
-                <select id="body_target" name="body_target" class="validate" required>
-                    <option value="" disabled selected>Choose Main Body target</option>
+                <select id="body_target" name="body_target" class="validate grey-text" required>
+                    <option value="" disabled selected>Targets:</option>
                     {% for target_category in category_name %}
                         <option value="{{ target_category.body_target }}">{{ target_category.body_target }}</option>
                     {% endfor %}
