@@ -67,7 +67,7 @@ The primary goal of this project is to allow users to create, view, store, arran
 
 This project uses bright and vibrant colours that match an active approach to life. Bright oranges for nav the bar and teals for buttons show information to users without distraction.
 
-![Site colour chart](wireframes/work-it-out-colours.png)
+![Site colour chart](wireframes/work-it-out-colourchart.png)
 
 * #009688 Persian Green - for informational elements and buttons.
 * #ee6e73 Candy Pink - for nav bar and footer.
