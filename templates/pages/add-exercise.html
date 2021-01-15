@@ -13,7 +13,7 @@
             </div>
             <!-- body_target selection -->
             <div class="input-field col s12 m2">
-                <select id="body_target" name="body_target" class="validate grey-text" required>
+                <select id="body-target" name="body-target" class="validate grey-text" required>
                     {% for target_category in category_name %}
                         <option value="{{ target_category.body_target }}">{{ target_category.body_target }}</option>
                     {% endfor %}
@@ -24,8 +24,8 @@
         <!-- estimated time and difficulty row-->
         <div class="row">
             <div class="input-field col s12 m2 offset-m4">
-                <input placeholder="est time between 0 - 9 mins" id="est_time" name="est_time" type="text" class="validate" minlength="1" maxlength="1" required>
-                <label for="first_name">Est. Time 0 - 9 minutes</label>
+                <input placeholder="est time between 0 - 9 mins" id="est-time" name="est-time" type="text" class="validate" minlength="1" maxlength="1" required>
+                <label for="est-time">Est. Time 0 - 9 minutes</label>
             </div>
             <!-- difficulty -->
             <div class="input-field col s12 m2">
@@ -47,7 +47,7 @@
         <!-- submit new exercise button-->
         <div class="row">
             <div class="center-align">
-                <button type="submit" class="waves-effect waves-light btn-large"><i class="material-icons right">add_box</i>Add Exercise</button>
+                <button type="submit" class="waves-effect waves-light btn-large" aria-label="add exercise"><i class="material-icons right">add_box</i>Add Exercise</button>
             </div>
         </div>
     </form>

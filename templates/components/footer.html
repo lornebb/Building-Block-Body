@@ -9,9 +9,9 @@
       <ul>
         <!-- nav bar selector -->
         {% if session.user %}
-          <li><a class="grey-text text-lighten-3" href="{{ url_for('contact') }}">Contact Us</a></li>
+          <li><a class="grey-text text-lighten-3" href="{{ url_for('contact') }}" aria-label="contact">Contact Us</a></li>
         {% endif %}
-        <li><a class="grey-text text-lighten-3" href="https://www.nerdfitness.com/blog/how-to-build-your-own-workout-routine/">Helpful reference - how to build your own workout</a></li>
+        <li><a class="grey-text text-lighten-3" href="https://www.nerdfitness.com/blog/how-to-build-your-own-workout-routine/" aria-label="link to external site with advice on how to make an exercise">Helpful reference - how to build your own workout</a></li>
       </ul> 
     </div>
   </div>
@@ -19,7 +19,7 @@
 <div class="footer-copyright">
   <div class="container">
     <span id="year"></span> LABB - for educational purposes only.
-      <a class="grey-text text-lighten-4 right" href="https://github.com/lornebb" target="_blank">
+      <a class="grey-text text-lighten-4 right" href="https://github.com/lornebb" target="_blank" aria-label="link to github of developer of site">
         <i class="material-icons tiny">chevron_left</i>
           <u>GitHub</u>
         <i class="material-icons tiny">chevron_right</i>

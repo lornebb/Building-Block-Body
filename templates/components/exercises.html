@@ -23,13 +23,13 @@
         {% if session.user %}
         <div class="card-action center-align">
             {% if exercise._id in workout_exercise_id %}
-                <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light green tooltipped" data-position="left" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
+                <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light green tooltipped" data-position="left" data-tooltip="Remove from workout" aria-label="remove exercise from workout"><i class="material-icons">check</i></a>
             {% else %}
-                <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light grey lighten-1 tooltipped" data-position="left" data-tooltip="Add to workout"><i class="material-icons">add</i></a>
+                <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light grey lighten-1 tooltipped" data-position="left" data-tooltip="Add to workout" aria-label="add exercise from workout"><i class="material-icons">add</i></a>
             {% endif %}
             {% if session.user|lower == exercise.user|lower %}
-            <a href="{{ url_for('edit_exercise', exercise_id=exercise._id) }}" class="btn-small yellow darken-2 tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons">create</i></a>
-            <button data-target="delete-modal" class="btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="delete"><i class="material-icons">delete_forever</i></button>
+            <a href="{{ url_for('edit_exercise', exercise_id=exercise._id) }}" class="btn-small yellow darken-2 tooltipped" data-position="top" data-tooltip="edit" aria-label="edit exercise"><i class="material-icons">create</i></a>
+            <button data-target="delete-modal" class="btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="delete" aria-label="delete exercise"><i class="material-icons">delete_forever</i></button>
             <!-- delete modal content -->
             <div id="delete-modal" class="modal">
                 <div class="modal-content">
@@ -37,8 +37,8 @@
                 </div>
                 <div class="modal-footer">
                     <form method="POST" action="{{ url_for('delete_exercise', exercise_id=exercise._id) }}">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text">No, close!</a>
-                        <button type="submit" class="modal-close waves-effect waves-green btn-flat red white-text">Delete</button>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text" aria-label="dont delete this exercise">No, close!</a>
+                        <button type="submit" class="modal-close waves-effect waves-green btn-flat red white-text" aria-label="delete confirm">Delete</button>
                     </form>
                 </div>
             </div>

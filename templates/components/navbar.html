@@ -2,59 +2,59 @@
   <!-- desktop nav -->
   <nav class="nav-extended">
     <div class="nav-wrapper z-depth-2">
-      <a href="{{ url_for('home') }}" class="brand-logo">Work It Out</a>
-      <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+      <a href="{{ url_for('home') }}" class="brand-logo" aria-label="all exercises">Work It Out</a>
+      <a href="#" data-target="mobile-menu" class="sidenav-trigger right" aria-label="mobile menu"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down ">
-          <li><a href="{{ url_for('home') }}">All Exercises</a></li>
+          <li><a href="{{ url_for('home') }}" aria-label="home">All Exercises</a></li>
           {% if session.user %}
-          <li><a href="{{ url_for('profile') }}">Profile</a></li>
-          <li><a href="{{ url_for('workout') }}">Workout</a></li>
-          <li><a href="{{ url_for('logout') }}" class="waves-effect waves-light btn"><i class="material-icons right">directions_run</i>Log Out</a></li>
+          <li><a href="{{ url_for('profile') }}" aria-label="profile">Profile</a></li>
+          <li><a href="{{ url_for('workout') }}" aria-label="workout">Workout</a></li>
+          <li><a href="{{ url_for('logout') }}" class="waves-effect waves-light btn"aria-label="logout"><i class="material-icons right">directions_run</i>Log Out</a></li>
           {% else %}
           <!-- Register and log in -->
-          <li><a href="{{ url_for('register') }}" class="waves-effect waves-light btn"><i class="material-icons right">how_to_reg</i>Register</a></li>
-          <li><a href="{{ url_for('login') }}" class="waves-effect waves-light btn"><i class="material-icons right">login</i>Log In</a></li>
+          <li><a href="{{ url_for('register') }}" class="waves-effect waves-light btn" aria-label="register"><i class="material-icons right">how_to_reg</i>Register</a></li>
+          <li><a href="{{ url_for('login') }}" class="waves-effect waves-light btn" aria-label="log in"><i class="material-icons right">login</i>Log In</a></li>
           {% endif %}
           <!-- Help Modal -->
-          <li><a class="waves-effect waves-light btn modal-trigger yellow darken-2" href="#helpmodal"><i class="material-icons">help</i></a></li>
-          <!-- Help Modal Content -->
-          <div id="helpmodal" class="modal modal-fixed-footer grey">
-            <div class="modal-content">
-              <h4 class="text-darken-5">Work It Out</h4>
-              <p class="flow-text">Stay healthy! Make your own workout! 
-                <br>
-                1. Register or Log In to make a profile.
-                <br>
-                2. From your profile you can <b>create an exercise.</b>
-                <br>
-                3. Browse all the exercises on the All Exercises page.
-                <br>
-                4. Add to your workout by using the red plus button.
-                <br>
-                5. Remove from workout using the green tick.
-              </p>
-            </div>
-            <div class="modal-footer grey lighten-1">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-            </div>
-          </div>
+          <li><a class="waves-effect waves-light btn modal-trigger yellow darken-2" href="#helpmodal" aria-label="help"><i class="material-icons">help</i></a></li>
         </ul>
     </div>
   </nav>
+  <!-- Help Modal Content -->
+  <div id="helpmodal" class="modal modal-fixed-footer grey">
+    <div class="modal-content">
+      <h4 class="text-darken-5">Work It Out</h4>
+      <p class="flow-text">Stay healthy! Make your own workout! 
+        <br>
+        1. Register or Log In to make a profile.
+        <br>
+        2. From your profile you can <b>create an exercise.</b>
+        <br>
+        3. Browse all the exercises on the All Exercises page.
+        <br>
+        4. Add to your workout by using the red plus button.
+        <br>
+        5. Remove from workout using the green tick.
+      </p>
+    </div>
+    <div class="modal-footer grey lighten-1">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" aria-label="close modal">Close</a>
+    </div>
+  </div>
   <!-- mobile nav -->
   <ul class="right sidenav" id="mobile-menu">
-    <li><a href="{{ url_for('home') }}">All Exercises</a></li>
+    <li><a href="{{ url_for('home') }}" aria-label="all exercises">All Exercises</a></li>
     {% if session.user %}
-    <li><a href="{{ url_for('profile') }}">Profile</a></li>
-    <li><a href="{{ url_for('workout') }}">Workout</a></li>
-    <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+    <li><a href="{{ url_for('profile') }}" aria-label="profile">Profile</a></li>
+    <li><a href="{{ url_for('workout') }}" aria-label="workout">Workout</a></li>
+    <li><a href="{{ url_for('logout') }}" aria-label="logout">Log Out</a></li>
     {% else %}
     <!-- Register and log in -->
-    <li><a href="{{ url_for('register') }}">Register</a></li>
-    <li><a href="{{ url_for('login') }}">Log In</a></li>
+    <li><a href="{{ url_for('register') }}" aria-label="register">Register</a></li>
+    <li><a href="{{ url_for('login') }}" aria-label="log in">Log In</a></li>
     {% endif %}
     <!-- <li><button data-target="modal1" class="btn modal-trigger"><i class="material-icons">help</i></button></li> -->
-    <li><a class="waves-effect waves-light btn modal-trigger yellow darken-2" href="#modalmobile">Help</a></li>
+    <li><a class="waves-effect waves-light btn modal-trigger yellow darken-2" href="#modalmobile" aria-label="help">Help</a></li>
   </ul>
   <!-- navbar modal content -->
   <div id="modalmobile" class="modal">
@@ -74,7 +74,7 @@
       </p>
     </div>
     <div class="modal-footer grey lighten-1">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" aria-label="close">Close</a>
     </div>
   </div>
 </header>

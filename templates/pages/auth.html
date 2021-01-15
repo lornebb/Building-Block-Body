@@ -14,13 +14,13 @@
                     <div class="row center-align"><h4>Log In</h4></div>
                     <div class="row center-align">Already have an account? Log In below.</div>
                     <div class="row center-align">
-                        <a href="{{ url_for('register') }}"><p>Don't have an acount? Register</p></a>
+                        <a href="{{ url_for('register') }}" aria-label="register"><p>Don't have an acount? Register</p></a>
                     </div>  
                 {% elif register %}
                     <div class="row center-align"><h4>Register</h4></div>
                     <div class="row center-align">Don't have an account yet? Register below.</div>
                     <div class="row center-align">
-                        <a href="{{ url_for('login') }}"><p>Already have an acount? Log in</p></a>
+                        <a href="{{ url_for('login') }}" aria-label="login"><p>Already have an acount? Log in</p></a>
                     </div>  
                 {% endif %}
                 </div>  
@@ -41,14 +41,14 @@
                 {% if login %}
                     <!-- Log In -->
                     <div class="row">
-                        <button type="submit" class="col s6 offset-s3 btn-large">
+                        <button type="submit" class="col s6 offset-s3 btn-large" aria-label="log in">
                             Log In
                         </button>
                     </div>
                 {% elif register %}
                     <!-- register -->
                     <div class="row">
-                        <button type="submit" class="col s6 offset-s3 btn-large">
+                        <button type="submit" class="col s6 offset-s3 btn-large" aria-label="register">
                             Register
                         </button>
                     </div>

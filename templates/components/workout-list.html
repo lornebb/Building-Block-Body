@@ -12,7 +12,7 @@
                         <span>{{ exercise.instruction }}</span>
                     </div>
                     <div class="card-action">
-                        <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}">Remove</a>
+                        <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" aria-label="remove exercise from workout">Remove</a>
                     </div>
                 </div>
             </div>

@@ -209,11 +209,11 @@ def add_new_exercise():
             flash("Intstruction is too long, max = 90 characters")
             return redirect(url_for("add_new_exercise"))
 
-        est_time_input = request.form.get("est_time")
+        est_time_input = request.form.get("est-time")
         est_time = 9 if int(est_time_input) >= 9 else est_time_input
 
         exercise = {
-            "body_target": request.form.get("body_target"),
+            "body_target": request.form.get("body-target"),
             "exercise_name": exercise_name_input,
             "instruction": exercise_instruction_input,
             "est_time": est_time,
@@ -256,7 +256,7 @@ def edit_exercise(exercise_id):
             flash("Intstruction is too long, max = 90 characters")
             return redirect(url_for("add_new_exercise"))
 
-        est_time_input = request.form.get("est_time")
+        est_time_input = request.form.get("est-time")
         est_time = 9 if int(est_time_input) >= 9 else est_time_input
 
         submit = {

@@ -14,6 +14,7 @@
     <div class="row">
         {% include 'components/exercises-user.html' %}
     </div>
+</div>
 <div class="divider"></div>
 
 <!-- contact button -->
@@ -22,7 +23,7 @@
         <div class="center-align"><h5>Get in touch.</h5></div>
     </div>
     <div class="center-align">
-        <a class="waves-effect waves-light btn-large" href="{{ url_for('contact') }}"><i class="material-icons right">email</i>Contact</a>
+        <a class="waves-effect waves-light btn-large" href="{{ url_for('contact') }}" aria-label="contact"><i class="material-icons right">email</i>Contact</a>
     </div>
 </div>
 

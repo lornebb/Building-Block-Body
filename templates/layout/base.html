@@ -4,18 +4,18 @@
     {% include 'layout/head.html' %}
 </head>
 <body>
-<main>
-  <!-- navbar -->
-  {% include 'components/navbar.html' %}
-  <!-- flash messages -->
-  {% include 'components/flash-messages.html' %}
-  <!-- block content -->
-  {% block content %} 
-  {% endblock %}
-</main>
-<footer class="page-footer">
-  {% include 'components/footer.html' %}
-</footer>
-{% include 'layout/scripts.html' %}
+  <main>
+    <!-- navbar -->
+    {% include 'components/navbar.html' %}
+    <!-- flash messages -->
+    {% include 'components/flash-messages.html' %}
+    <!-- block content -->
+    {% block content %} 
+    {% endblock %}
+  </main>
+  <footer class="page-footer">
+    {% include 'components/footer.html' %}
+  </footer>
+  {% include 'layout/scripts.html' %}
 </body>
 </html>

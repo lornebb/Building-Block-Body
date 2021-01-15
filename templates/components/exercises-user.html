@@ -1,7 +1,7 @@
 {% if userexercises|length > 0 %}
 
     <div class="center-align">
-        <a class="waves-effect waves-light btn-small" href="{{ url_for('add_new_exercise') }}"><i class="material-icons right">add_box</i>Add A New Exercise</a>
+        <a class="waves-effect waves-light btn-small" href="{{ url_for('add_new_exercise') }}" aria-label="add new exercise"><i class="material-icons right">add_box</i>Add A New Exercise</a>
     </div>
     <div class="row">
     {% for exercise in userexercises %}
@@ -17,7 +17,7 @@
                 <h4>You haven't made any exercises, get started by making one, or viewing <a href="{{ url_for('home') }}">All Exercises</a></h4>
             </div>
             <div class="center-align">
-                <a class="waves-effect waves-light btn-large" href="{{ url_for('add_new_exercise') }}"><i class="material-icons right">add_box</i>Add New Exercise</a>
+                <a class="waves-effect waves-light btn-large" href="{{ url_for('add_new_exercise') }}" aria-label="add new exercise"><i class="material-icons right">add_box</i>Add New Exercise</a>
             </div>
         </div>
     </div>
