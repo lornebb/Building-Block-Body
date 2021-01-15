@@ -334,7 +334,7 @@ def contact():
     """
     Renders the contact page.
     """
-    return render_template("pages/contact.html")
+    return render_template("pages/contact.html", title="Contact", contact=True)
 
 
 @app.errorhandler(404)
