@@ -3,7 +3,7 @@
     <div class="parallax-container">
         <div class="parallax"><img src="{{ url_for('static', filename='images/hero-image.jpg') }}"></div>
     </div>
-
+    
     {% if not session.user %}
     <div class="row center-align">
         <h6>You are not logged in, please <a href="{{ url_for('register') }}">register</a> or <a href="{{ url_for('login') }}">log in</a>.</h6>
