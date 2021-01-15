@@ -49,11 +49,11 @@ def home():
             workout_exercises.append(current_exercise)
 
         userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/home.html", title="Home", username=username, exercises=exercises, userexercises=list(userexercises),
+        return render_template("pages/home.html", title="All Exercises", username=username, exercises=exercises, userexercises=list(userexercises),
                                 workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
     
     else:
-        return render_template("pages/home.html", title="Home", exercises=exercises)
+        return render_template("pages/home.html", title="All Exercises", exercises=exercises)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -83,9 +83,9 @@ def register():
 
         session["user"] = request.form.get("username").lower()
         flash("Success! You are now registered.")
-        return render_template("pages/profile.html", username=session["user"])
+        return render_template("pages/profile.html", title="Profile", username=session["user"])
 
-    return render_template("pages/auth.html", title="register", register=True)
+    return render_template("pages/auth.html", title="Register", register=True)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -115,7 +115,7 @@ def login():
         else:
             # username is not in database
             flash("Incorrect details, please try again")
-            return render_template("pages/auth.html")
+            return redirect(url_for("login"))
 
     return render_template("pages/auth.html", title="Login", login=True)
 
@@ -149,7 +149,7 @@ def profile():
 
     if username:
         userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/profile.html", username=username, userexercises=list(userexercises),
+        return render_template("pages/profile.html", title="Profile", username=username, userexercises=list(userexercises),
                                 workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
 
     return redirect(url_for("login"))
@@ -204,7 +204,7 @@ def add_new_exercise():
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     category_name = mongo.db.target_category.find().sort("body_target", 1)
-    return render_template("pages/add-exercise.html", username=username, category_name=category_name)
+    return render_template("pages/add-exercise.html", title="Add New Exercise", username=username, category_name=category_name)
 
 
 @app.route("/edit/exercise/<exercise_id>", methods=["GET", "POST"])
@@ -247,7 +247,7 @@ def edit_exercise(exercise_id):
         {"username": session["user"]})["username"]
     exercise = mongo.db.exercises.find_one({"_id": ObjectId(exercise_id)})
     category_name = mongo.db.target_category.find().sort("body_target", 1)
-    return render_template("pages/edit-exercise.html", username=username, exercise=exercise, category_name=category_name)
+    return render_template("pages/edit-exercise.html", title="Edit Exercise", username=username, exercise=exercise, category_name=category_name)
 
 
 @app.route("/delete/<exercise_id>")
@@ -297,9 +297,9 @@ def workout():
 
     if username:
         userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/workout.html", username=username, userexercises=list(userexercises),
+        return render_template("pages/workout.html", title="Workout", username=username, userexercises=list(userexercises),
                                 workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
-    return render_template("pages/workout.html")
+    return render_template("pages/workout.html", title="Workout")
 
 
 @app.route("/workout/add/<exercise_id>")
@@ -345,7 +345,7 @@ def not_found(error):
     to home.
     """
     error_code = str(error)
-    return render_template("pages/not-found.html", error_code=error_code), 404
+    return render_template("pages/not-found.html", title="404 error page", error_code=error_code), 404
 
 
 @app.errorhandler(400)
@@ -356,7 +356,18 @@ def bad_request(error):
     to home.
     """
     error_code = str(error)
-    return render_template("pages/not-found.html", error_code=error_code), 400
+    return render_template("pages/not-found.html", title="400 error page", error_code=error_code), 400
+
+
+@app.errorhandler(405)
+def bad_request(error):
+    """
+    Will catch 405 error for when a bad request occurs and 
+    render error page to display error to user with a redirect 
+    to home.
+    """
+    error_code = str(error)
+    return render_template("pages/not-found.html", title="405 error page", error_code=error_code), 405
 
 
 @app.errorhandler(500)
@@ -367,7 +378,7 @@ def server_error(error):
     to home.
     """
     error_code = str(error)
-    return render_template("pages/not-found.html", error_code=error_code), 500
+    return render_template("pages/not-found.html", title="500 error page", error_code=error_code), 500
 
 
 if __name__ == "__main__":
