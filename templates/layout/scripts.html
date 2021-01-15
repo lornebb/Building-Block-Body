@@ -5,6 +5,7 @@
 {% if contact %}
 <!-- EmailJs -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/emailjs.js') }}"></script>
 {% endif %}
 <!-- Custom javascript -->
 <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
