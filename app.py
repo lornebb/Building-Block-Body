@@ -1,4 +1,4 @@
-import os 
+import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -17,50 +17,64 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
 @app.route("/")
 def home():
     """
-    This function loads the home landing page, checks if there is a user logged in
-    then finds that users' workout array.
-    It checks if that array is empty or not, if it isn't empty, then it goes through
-    that array and populates the workout_exercises list to be passed to the page.
-    It also passes all the exercises to the page to iterate over, too.
-    These variables allow the page to show wether an exercise was made by
-    the logged in user or not, and show edit/delete options if so.
-    If no session user then only displays page and sends the exercises list.
+    This function loads the home landing page, checks if there is a
+    user logged in then finds that users' workout array.
+    It checks if that array is empty or not, if it isn't empty, then
+    it goes through that array and populates the workout_exercises
+    list to be passed to the page. It also passes all the exercises
+    to the page to iterate over, too. These variables allow the page
+    to show wether an exercise was made by the logged in user or not,
+    and show edit/delete options if so. If no session user then only
+    displays page and sends the exercises list.
     """
     exercises = mongo.db.exercises.find()
 
     if 'user' in session:
-        username = mongo.db.users.find_one({"username": session["user"]})["username"]
-        current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+        current_user_obj = mongo.db.users.find_one(
+            {'username': session['user'].lower()})
         current_user_workout = current_user_obj['workout']
         workout_exercises = []
         workout_exercise_id = []
 
         if len(current_user_workout) != 0:
             for exercise in current_user_workout:
-                current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
+                current_exercise = mongo.db.exercises.find_one(
+                    {'_id': ObjectId(exercise)})
                 current_exercise_id = current_exercise['_id']
                 workout_exercise_id.append(current_exercise_id)
-    
+
         for exercise in current_user_workout:
             current_exercise = mongo.db.exercises.find_one({'_id': exercise})
             workout_exercises.append(current_exercise)
 
-        userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/home.html", title="All Exercises", username=username, exercises=exercises, userexercises=list(userexercises),
-                                workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
-    
+        userexercises = mongo.db.exercises.find({"user": username})
+        return render_template(
+            "pages/home.html",
+            title="All Exercises",
+            username=username,
+            exercises=exercises,
+            userexercises=list(userexercises),
+            workout_exercise_id=workout_exercise_id,
+            workout_exercises=workout_exercises)
+
     else:
-        return render_template("pages/home.html", title="All Exercises", exercises=exercises)
+        return render_template(
+            "pages/home.html",
+            title="All Exercises",
+            exercises=exercises)
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
     Will render register page and handle account register on POST.
-    This posts user details into database and check to see if 
+    This posts user details into database and check to see if
     user already exists - if username already exists it flashes
     a message for the user to try and log in or try another username.
     On password submission, hashes password using Werkeug.
@@ -83,7 +97,10 @@ def register():
 
         session["user"] = request.form.get("username").lower()
         flash("Success! You are now registered.")
-        return render_template("pages/profile.html", title="Profile", username=session["user"])
+        return render_template(
+            "pages/profile.html",
+            title="Profile",
+            username=session["user"])
 
     return render_template("pages/auth.html", title="Register", register=True)
 
@@ -92,22 +109,20 @@ def register():
 def login():
     """
     Will render log in page and create session cookie for user session.
-    Also checks for if password matches with database, with messages for if incorrect.
+    Also checks for if password matches with database, with messages
+    for if incorrect.
     """
-    # log in form - checks if user is registered
     if request.method == "POST":
         username_confirmed = mongo.db.users.find_one(
-        {"username": request.form.get("username").lower()})
-        
+            {"username": request.form.get("username").lower()})
+
         if username_confirmed:
-            # checks that hashed password matches user input and creates session cookie
             if check_password_hash(
-                username_confirmed["password"], request.form.get("password")):
-                    session["user"] = request.form.get(
-                        "username").lower()
-                    flash("Welcome back, {}".format(
-                        request.form.get("username")))
-                    return redirect(url_for("profile", username=session["user"]))
+                    username_confirmed["password"],
+                    request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome back, {}".format(request.form.get("username")))
+                return redirect(url_for("profile", username=session["user"]))
             else:
                 # if password does not match
                 flash("Incorrect details, please try again")
@@ -124,33 +139,41 @@ def login():
 def profile():
     """
     Will render profile page and create variables for page to use.
-    Username is passed for header text and to check through the 
-    user exercises list for matches so as to send only the users exercises to page.
-    Will also check against the users workout array for matches, so the page can 
-    correctly show what exercies are already in the users workout list.
+    Username is passed for header text and to check through the
+    user exercises list for matches so as to send only the users exercises to
+    page. Will also check against the users workout array for matches,
+    so the page can correctly show what exercies are already in the users
+    workout list.
     """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    
-    current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
+
+    current_user_obj = mongo.db.users.find_one(
+        {'username': session['user'].lower()})
     current_user_workout = current_user_obj['workout']
     workout_exercises = []
     workout_exercise_id = []
 
     if current_user_workout != []:
         for exercise in current_user_workout:
-            current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
+            current_exercise = mongo.db.exercises.find_one(
+                {'_id': ObjectId(exercise)})
             current_exercise_id = current_exercise['_id']
             workout_exercise_id.append(current_exercise_id)
-    
+
     for exercise in current_user_workout:
         current_exercise = mongo.db.exercises.find_one({'_id': exercise})
         workout_exercises.append(current_exercise)
 
     if username:
-        userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/profile.html", title="Profile", username=username, userexercises=list(userexercises),
-                                workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
+        userexercises = mongo.db.exercises.find({"user": username})
+        return render_template(
+            "pages/profile.html",
+            title="Profile",
+            username=username,
+            userexercises=list(userexercises),
+            workout_exercise_id=workout_exercise_id,
+            workout_exercises=workout_exercises)
 
     return redirect(url_for("login"))
 
@@ -180,7 +203,7 @@ def add_new_exercise():
         if len(exercise_name_input) >= 21:
             flash("Title is too long, max = 20 characters")
             return redirect(url_for("add_new_exercise"))
-        
+
         exercise_instruction_input = request.form.get("instruction")
         if len(exercise_instruction_input) >= 91:
             flash("Intstruction is too long, max = 90 characters")
@@ -203,26 +226,31 @@ def add_new_exercise():
 
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+
     category_name = mongo.db.target_category.find().sort("body_target", 1)
-    return render_template("pages/add-exercise.html", title="Add New Exercise", username=username, category_name=category_name)
+    return render_template(
+        "pages/add-exercise.html",
+        title="Add New Exercise",
+        username=username,
+        category_name=category_name)
 
 
 @app.route("/edit/exercise/<exercise_id>", methods=["GET", "POST"])
 def edit_exercise(exercise_id):
     """
     Will render edit exercise page, and show form to pre-populated with
-    current exercise.
-    Will post any data in form to the database, overwriting what was previously there.
-    Also shows only the body targets available in the database.
-    Some defensive paramters also included for if user changes html, such as
-    estimate time max value and title and instruction length.
+    current exercise. Will post any data in form to the database,
+    overwriting what was previously there. Also shows only the body
+    targets available in the database. Some defensive paramters also included
+    for if user changes html, such as estimate time max value and title and
+    instruction length.
     """
     if request.method == "POST":
         exercise_name_input = request.form.get("exercise-name")
         if len(exercise_name_input) >= 21:
             flash("Title is too long, max = 20 characters")
             return redirect(url_for("add_new_exercise"))
-        
+
         exercise_instruction_input = request.form.get("instruction")
         if len(exercise_instruction_input) >= 91:
             flash("Intstruction is too long, max = 90 characters")
@@ -242,18 +270,23 @@ def edit_exercise(exercise_id):
         mongo.db.exercises.update({"_id": ObjectId(exercise_id)}, submit)
         flash("Exercise updated successfully")
         return redirect(url_for("profile"))
-    
+
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     exercise = mongo.db.exercises.find_one({"_id": ObjectId(exercise_id)})
     category_name = mongo.db.target_category.find().sort("body_target", 1)
-    return render_template("pages/edit-exercise.html", title="Edit Exercise", username=username, exercise=exercise, category_name=category_name)
+    return render_template(
+        "pages/edit-exercise.html",
+        title="Edit Exercise",
+        username=username,
+        exercise=exercise,
+        category_name=category_name)
 
 
 @app.route("/delete/<exercise_id>", methods=["POST"])
 def delete_exercise(exercise_id):
     """
-    Will delete exercise from database and return user to 
+    Will delete exercise from database and return user to
     their profile page, with a flash message to confirm using
     exercise id to cross check correct exercise being deleted.
     Also checks if the current exercise is in any users workout and
@@ -266,7 +299,9 @@ def delete_exercise(exercise_id):
 
         for user in list(users):
             if exercise_id in user['workout']:
-                mongo.db.users.update({"_id": ObjectId(user['_id'])}, {"$pull": {"workout": exercise_id}})
+                mongo.db.users.update(
+                    {"_id": ObjectId(user['_id'])}, {
+                        "$pull": {"workout": exercise_id}})
 
         mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
 
@@ -277,38 +312,47 @@ def delete_exercise(exercise_id):
 @app.route("/workout")
 def workout():
     """
-    Will render workout page, checking user workout array against the 
+    Will render workout page, checking user workout array against the
     exercise collection to show the correct data.
     """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    
-    current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
+
+    current_user_obj = mongo.db.users.find_one(
+        {'username': session['user'].lower()})
     current_user_workout = current_user_obj['workout']
     workout_exercises = []
     workout_exercise_id = []
 
     if len(current_user_workout) != 0:
         for exercise in current_user_workout:
-            current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
+            current_exercise = mongo.db.exercises.find_one(
+                {'_id': ObjectId(exercise)})
             current_exercise_id = current_exercise['_id']
             workout_exercise_id.append(current_exercise_id)
-    
+
     for exercise in current_user_workout:
-        current_exercise = mongo.db.exercises.find_one({'_id': ObjectId(exercise)})
+        current_exercise = mongo.db.exercises.find_one(
+            {'_id': ObjectId(exercise)})
         workout_exercises.append(current_exercise)
 
     if username:
-        userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/workout.html", title="Workout", username=username, userexercises=list(userexercises),
-                                workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
+        userexercises = mongo.db.exercises.find({"user": username})
+        return render_template(
+            "pages/workout.html",
+            title="Workout",
+            username=username,
+            userexercises=list(userexercises),
+            workout_exercise_id=workout_exercise_id,
+            workout_exercises=workout_exercises)
+
     return render_template("pages/workout.html", title="Workout")
 
 
 @app.route("/workout/add/<exercise_id>")
 def add_to_workout(exercise_id):
     """
-    Adds exercise to users workout list by pushing 
+    Adds exercise to users workout list by pushing
     exercise _id string to a workout array in user in database.
     """
     mongo.db.users.find_one_and_update(
@@ -321,7 +365,7 @@ def add_to_workout(exercise_id):
 @app.route("/workout/remove/<exercise_id>")
 def remove_from_workout(exercise_id):
     """
-    Removes exercise from workout by taking the id string 
+    Removes exercise from workout by taking the id string
     out of the users workout array in the database.
     """
     mongo.db.users.find_one_and_update(
@@ -343,45 +387,54 @@ def contact():
 @app.errorhandler(404)
 def not_found(error):
     """
-    Will catch 404 error for when a Page is not found and 
-    render error page to display error to user with a redirect 
-    to home.
+    Will catch 404 error for when a bad request occurs and render error page
+    to display error to user with a redirect to home.
     """
     error_code = str(error)
-    return render_template("pages/not-found.html", title="404 error page", error_code=error_code), 404
+    return render_template(
+        "pages/not-found.html",
+        title="404 error page",
+        error_code=error_code), 404
 
 
 @app.errorhandler(400)
 def bad_request(error):
     """
-    Will catch 400 error for when a bad request occurs and 
-    render error page to display error to user with a redirect 
-    to home.
+    Will catch 400 error for when a bad request occurs and render error page
+    to display error to user with a redirect to home.
     """
     error_code = str(error)
-    return render_template("pages/not-found.html", title="400 error page", error_code=error_code), 400
+    return render_template(
+        "pages/not-found.html",
+        title="400 error page",
+        error_code=error_code), 400
 
 
 @app.errorhandler(405)
 def bad_request(error):
     """
-    Will catch 405 error for when a bad request occurs and 
-    render error page to display error to user with a redirect 
+    Will catch 405 error for when a bad request occurs and render error page
+    to display error to user with a redirect to home.
     to home.
     """
     error_code = str(error)
-    return render_template("pages/not-found.html", title="405 error page", error_code=error_code), 405
+    return render_template(
+        "pages/not-found.html",
+        title="405 error page",
+        error_code=error_code), 405
 
 
 @app.errorhandler(500)
 def server_error(error):
     """
-    Will catch 500 error for when an internal server error occurs and 
-    render error page to display error to user with a redirect 
-    to home.
+    Will catch 500 error for when a bad request occurs and render error page
+    to display error to user with a redirect to home.
     """
     error_code = str(error)
-    return render_template("pages/not-found.html", title="500 error page", error_code=error_code), 500
+    return render_template(
+        "pages/not-found.html",
+        title="500 error page",
+        error_code=error_code), 500
 
 
 if __name__ == "__main__":
