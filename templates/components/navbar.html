@@ -6,9 +6,15 @@
       <a href="#" data-target="mobile-menu" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down ">
           <li><a href="{{ url_for('home') }}">All Exercises</a></li>
+          {% if session.user %}
           <li><a href="{{ url_for('profile') }}">Profile</a></li>
           <li><a href="{{ url_for('workout') }}">Workout</a></li>
           <li><a href="{{ url_for('logout') }}" class="waves-effect waves-light btn"><i class="material-icons right">directions_run</i>Log Out</a></li>
+          {% else %}
+          <!-- Register and log in -->
+          <li><a href="{{ url_for('register') }}" class="waves-effect waves-light btn"><i class="material-icons right">how_to_reg</i>Register</a></li>
+          <li><a href="{{ url_for('login') }}" class="waves-effect waves-light btn"><i class="material-icons right">login</i>Log In</a></li>
+          {% endif %}
           <!-- Help Modal -->
           <li><a class="waves-effect waves-light btn modal-trigger yellow darken-2" href="#helpmodal"><i class="material-icons">help</i></a></li>
           <!-- Help Modal Content -->
