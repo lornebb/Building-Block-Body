@@ -18,7 +18,6 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# home page not logged in
 @app.route("/")
 def home():
     """
@@ -31,7 +30,6 @@ def home():
     return render_template("pages/home.html", exercises=exercises)   
 
 
-# home page logged in
 @app.route("/home-loggedin")
 def home_logged_in():
     """
@@ -71,7 +69,6 @@ def home_logged_in():
         return render_template("pages/home.html", exercises=exercises)
 
 
-# register and sign up page
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
@@ -136,7 +133,6 @@ def login():
     return render_template("pages/login.html")
 
 
-# Profile page route
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     """
@@ -172,7 +168,6 @@ def profile():
     return redirect(url_for("login"))
 
 
-# Log out functionality route
 @app.route("/logout")
 def logout():
     """
