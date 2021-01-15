@@ -67,10 +67,13 @@ The primary goal of this project is to allow users to create, view, store, arran
 
 This project uses bright and vibrant colours that match an active approach to life. Bright oranges for nav the bar and teals for buttons show information to users without distraction.
 
-* #009688 - for informational elements and buttons.
-* #ee6e73 - for nav bar and footer.
-* #F44336 - red for floating action button to add exercises to workout, but to display that exercise currently does not exists in user workout.
-* #4CAF50 - green for floating action button to remove exercise from workout, but to display that exercise currently exists in user workout.
+![Site colour chart](wireframes/work-it-out-colours.png)
+
+* #009688 Persian Green - for informational elements and buttons.
+* #ee6e73 Candy Pink - for nav bar and footer.
+* #F44336 Tart Orange - for button to add exercises to workout, but to display that exercise currently does not exists in user workout.
+* #4CAF50 Green Pantone - for button to remove exercise from workout, but to display that exercise currently exists in user workout.
+* #fbc02d Orange Yellow - for informational elements - such as the help modal in the nav bar and edit exercise.
 
 ##### Shadows and Structure
 
