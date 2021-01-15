@@ -1,71 +1,25 @@
-<div class="container">
-    {% if userexercises|length > 0 %}
+{% if userexercises|length > 0 %}
 
-        <div class="center-align">
-            <a class="waves-effect waves-light btn-small" href="{{ url_for('add_new_exercise') }}"><i class="material-icons right">add_box</i>Add A New Exercise</a>
-        </div>
-        <div class="row">
-        {% for exercise in userexercises %}
-            <div class="col s12 m4">
-                <div class="card medium">
-                    <!-- cycle through images for correct to match body target -->
-                    <div class="card-image">
-                        {% if exercise.body_target|lower == "upper body" %}
-                            <img src="{{ url_for('static', filename='images/body-target-imgs/upperbody.jpg') }}" >
-                        {% elif exercise.body_target|lower == "lower body" %}
-                            <img src="{{ url_for('static', filename='images/body-target-imgs/lower-body.jpg') }}">
-                        {% elif exercise.body_target|lower == "back body" %}
-                            <img src="{{ url_for('static', filename='images/body-target-imgs/back-body.jpg') }}">
-                        {% elif exercise.body_target|lower == "abdominals" %}
-                            <img src="{{ url_for('static', filename='images/body-target-imgs/abs.jpg') }}">
-                        {% endif %}
-                        <span class="card-title">{{ exercise.exercise_name }}</span>
-                    </div>
-                    <!-- exercise instruction -->
-                    <div class="card-content">
-                        <div class="center-align"><span class="grey lighten-2">{{ exercise.body_target }}</span></div>
-                        <div class="center-align"><i>{{ exercise.difficulty }}, {{ exercise.est_time }}</i></div>
-                        <p>{{ exercise.instruction }}</p>
-                    </div>
-                    <!-- add to workout button and edit and delete boxes -->
-                    <div class="card-action center-align">
-                        {% if exercise._id in workout_exercise_id %}
-                            <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light green tooltipped" data-position="left" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
-                        {% else %}
-                            <a href="{{ url_for('add_to_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light grey lighten-1 tooltipped" data-position="left" data-tooltip="Add to workout"><i class="material-icons">add</i></a>
-                        {% endif %}
-                        <a href="{{ url_for('edit_exercise', exercise_id=exercise._id) }}" class="btn-small yellow darken-2 tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons">create</i></a>
-                        <button data-target="delete-modal" class="btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="delete"><i class="material-icons">delete_forever</i></button>
-                        <!-- delete modal content -->
-                        <div id="delete-modal" class="modal">
-                            <div class="modal-content">
-                                <h4>Are you sure you want to delete?</h4>
-                            </div>
-                            <div class="modal-footer">
-                                <form method="POST" action="{{ url_for('delete_exercise', exercise_id=exercise._id) }}">
-                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text">No, close!</a>
-                                    <button type="submit" class="modal-close waves-effect waves-green btn-flat red white-text">Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="center-align">
+        <a class="waves-effect waves-light btn-small" href="{{ url_for('add_new_exercise') }}"><i class="material-icons right">add_box</i>Add A New Exercise</a>
+    </div>
+    <div class="row">
+    {% for exercise in userexercises %}
+        {% include 'components/exercises.html' %}
+    {% endfor %}
+    </div>
+
+{% else %}
+
+    <div class="row">
+        <div class="col s12 m6 offset-m3">
+            <div class="center-align">
+                <h4>You haven't made any exercises, get started by making one, or viewing <a href="{{ url_for('home') }}">All Exercises</a></h4>
             </div>
-            {% endfor %}
-        </div>
-
-    {% else %}
-
-        <div class="row">
-            <div class="col s12 m6 offset-m3">
-                <div class="center-align">
-                    <h4>You haven't made any exercises, get started by making one, or viewing <a href="{{ url_for('home') }}">All Exercises</a></h4>
-                </div>
-                <div class="center-align">
-                    <a class="waves-effect waves-light btn-large" href="{{ url_for('add_new_exercise') }}"><i class="material-icons right">add_box</i>Add New Exercise</a>
-                </div>
+            <div class="center-align">
+                <a class="waves-effect waves-light btn-large" href="{{ url_for('add_new_exercise') }}"><i class="material-icons right">add_box</i>Add New Exercise</a>
             </div>
         </div>
+    </div>
 
-    {% endif %}
-</div>
+{% endif %}

@@ -10,6 +10,14 @@
     </div>
     {% endif %}
 
-    {% include 'components/exercises-all.html' %}
+    <div class="section">
+        <div class="center-align"><h4>All Exercises</h4></div>
+        <div class="row">
+            {% for exercise in exercises %}
+                {% include 'components/exercises.html' %}
+            {% endfor %}
+        </div>
+    </div>
+    
 
 {% endblock %}
