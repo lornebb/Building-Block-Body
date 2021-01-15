@@ -42,8 +42,10 @@
                                 <h4>Are you sure you want to delete?</h4>
                             </div>
                             <div class="modal-footer">
-                                <a href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text">No, close!</a>
-                                <a href="{{ url_for('delete_exercise', exercise_id=exercise._id) }}" class="modal-close waves-effect waves-green btn-flat red white-text">Delete</a>
+                                <form method="POST" action="{{ url_for('delete_exercise', exercise_id=exercise._id) }}">
+                                <button href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text">No, close!</button>
+                                <button class="submit modal-close waves-effect waves-green btn-flat red white-text">Delete</button>
+                                </form>
                             </div>
                         </div>
                         {% if session.user|lower == exercise.user|lower %}

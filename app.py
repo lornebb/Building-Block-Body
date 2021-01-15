@@ -250,7 +250,7 @@ def edit_exercise(exercise_id):
     return render_template("pages/edit-exercise.html", title="Edit Exercise", username=username, exercise=exercise, category_name=category_name)
 
 
-@app.route("/delete/<exercise_id>")
+@app.route("/delete/<exercise_id>", methods=["POST"])
 def delete_exercise(exercise_id):
     """
     Will delete exercise from database and return user to 
@@ -259,16 +259,17 @@ def delete_exercise(exercise_id):
     Also checks if the current exercise is in any users workout and
     removes from their workout also to avoid loading errors for other users.
     """
-    users = mongo.db.users.find()
+    if request.method == "POST":
+        users = mongo.db.users.find()
 
-    for user in list(users):
-        if exercise_id in user['workout']:
-            mongo.db.users.update({"_id": ObjectId(user['_id'])}, {"$pull": {"workout": exercise_id}})
+        for user in list(users):
+            if exercise_id in user['workout']:
+                mongo.db.users.update({"_id": ObjectId(user['_id'])}, {"$pull": {"workout": exercise_id}})
 
-    mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
+        mongo.db.exercises.remove({"_id": ObjectId(exercise_id)})
 
-    flash("Exercise deleted.")
-    return redirect(url_for("profile"))
+        flash("Exercise deleted.")
+        return redirect(url_for("profile"))
 
 
 @app.route("/workout")
