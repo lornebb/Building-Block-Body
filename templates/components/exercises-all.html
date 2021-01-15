@@ -26,7 +26,6 @@
                 <!-- add/remove workout and edit and delete boxes -->
                 {% if session.user %}
                 <div class="card-action center-align">
-                    <!-- add to workout button -->
                     {% if exercise._id in workout_exercise_id %}
                         <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}" class="btn-small pulse waves-effect waves-light green tooltipped" data-position="left" data-tooltip="Remove from workout"><i class="material-icons">check</i></a>
                     {% else %}
@@ -41,8 +40,10 @@
                             <h4>Are you sure you want to delete?</h4>
                         </div>
                         <div class="modal-footer">
-                            <a href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text">No, close!</a>
-                            <a href="{{ url_for('delete_exercise', exercise_id=exercise._id) }}" class="modal-close waves-effect waves-green btn-flat red white-text">Delete</a>
+                            <form method="POST" action="{{ url_for('delete_exercise', exercise_id=exercise._id) }}">
+                                <a href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text">No, close!</a>
+                                <button type="submit" class="modal-close waves-effect waves-green btn-flat red white-text">Delete</button>
+                            </form>
                         </div>
                     </div>
                     {% endif %}
@@ -53,3 +54,4 @@
         {% endfor %}
     </div>
 </div>
+

@@ -8,12 +8,12 @@
         <!-- exercise name and body target row -->
         <div class="row">  
             <div class="input-field col s12 m2 offset-m4">
-                <input value="{{ exercise.exercise_name }}" id="exercise_name" name="exercise_name" type="text" class="validate" required>
+                <input value="{{ exercise.exercise_name }}" id="exercise-name" name="exercise-name" type="text" class="validate" required>
                 <label for="exercise_name">Exercise Name</label>
             </div>
             <!-- body_target selection -->
             <div class="input-field col s12 m2">
-                <select id="body_target" name="body_target" class="validate" required>
+                <select id="body_target" name="body-target" class="validate" required>
                     <option value="" disabled>Choose Main Body target</option>
                     {% for target_category in category_name %}
                         {% if target_category.exercise_name == exercise.exercise_name %}

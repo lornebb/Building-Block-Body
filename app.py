@@ -176,7 +176,7 @@ def add_new_exercise():
     estimate time max value and title and instruction length.
     """
     if request.method == "POST":
-        exercise_name_input = request.form.get("exercise_name")
+        exercise_name_input = request.form.get("exercise-name")
         if len(exercise_name_input) >= 21:
             flash("Title is too long, max = 20 characters")
             return redirect(url_for("add_new_exercise"))
@@ -218,7 +218,7 @@ def edit_exercise(exercise_id):
     estimate time max value and title and instruction length.
     """
     if request.method == "POST":
-        exercise_name_input = request.form.get("exercise_name")
+        exercise_name_input = request.form.get("exercise-name")
         if len(exercise_name_input) >= 21:
             flash("Title is too long, max = 20 characters")
             return redirect(url_for("add_new_exercise"))
@@ -232,7 +232,7 @@ def edit_exercise(exercise_id):
         est_time = 9 if int(est_time_input) >= 9 else est_time_input
 
         submit = {
-            "body_target": request.form.get("body_target"),
+            "body_target": request.form.get("body-target"),
             "exercise_name": exercise_name_input,
             "instruction": exercise_instruction_input,
             "est_time": est_time,
@@ -258,6 +258,8 @@ def delete_exercise(exercise_id):
     exercise id to cross check correct exercise being deleted.
     Also checks if the current exercise is in any users workout and
     removes from their workout also to avoid loading errors for other users.
+    Defensively only takes post request to avoid deleting by directing url
+    with exercise id string.
     """
     if request.method == "POST":
         users = mongo.db.users.find()
