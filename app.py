@@ -350,7 +350,7 @@ def remove_from_workout(exercise_id):
 @app.route("/contact")
 def contact():
     '''
-    Renders a contact page.
+    Renders the contact page.
     '''
     return render_template("pages/contact.html")
 
@@ -363,7 +363,7 @@ def not_found(error):
     to home.
     '''
     error_code = str(error)
-    return render_template("pages/not_found.html", error_code=error_code), 404
+    return render_template("pages/not-found.html", error_code=error_code), 404
 
 
 @app.errorhandler(400)
@@ -374,7 +374,7 @@ def bad_request(error):
     to home.
     '''
     error_code = str(error)
-    return render_template("pages/not_found.html", error_code=error_code), 400
+    return render_template("pages/not-found.html", error_code=error_code), 400
 
 
 @app.errorhandler(500)
@@ -385,7 +385,7 @@ def server_error(error):
     to home.
     '''
     error_code = str(error)
-    return render_template("pages/not_found.html", error_code=error_code), 500
+    return render_template("pages/not-found.html", error_code=error_code), 500
 
 
 if __name__ == "__main__":

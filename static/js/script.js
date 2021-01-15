@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $(".sidenav").sidenav({ edge: "right" });
   $(".parallax").parallax();
-  $("#instruction").characterCounter();
+  $("input").characterCounter();
   $("select").formSelect();
   $("#copyright").text(new Date().getFullYear());
   $("#contact-form-fail").hide();

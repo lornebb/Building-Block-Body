@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="center-align"><h4>{{ username }}<br> Edit your exercise.</h4></div>
-<br>
+
 <section class="section">
     <form method="POST" action="{{ url_for('edit_exercise', exercise_id=exercise._id) }}">
         <!-- exercise name and body target row -->

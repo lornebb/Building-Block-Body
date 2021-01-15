@@ -2,14 +2,14 @@
 {% block content %}
 
 <div class="center-align"><h4>{{ username }} <br> Make a new exercise.</h4></div>
-<br>
+
 <section class="section">
     <form method="POST" action="{{ url_for('add_new_exercise') }}">
         <!-- exercise name and body target row -->
         <div class="row">
             <div class="input-field col s12 m2 offset-m4">
-                <input placeholder="What do you call it?" id="exercise_name" name="exercise_name" type="text" class="validate" minlength="5" maxlength="20" data-length="20" required>
-                <label for="exercise_name">Exercise Name</label>
+                <input placeholder="Name" id="exercise_name" name="exercise-name" type="text" class="validate" minlength="1" maxlength="20" data-length="20" required>
+                <label for="exercise-name">Exercise Name</label>
             </div>
             <!-- body_target selection -->
             <div class="input-field col s12 m2">
