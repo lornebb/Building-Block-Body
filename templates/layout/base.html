@@ -5,13 +5,9 @@
 </head>
 <body>
 <main>
-  <!-- nav bar selector -->
-  {% if session.user %}
-      {% include 'components/nav-loggedin.html' %}
-    {% else %}
-      {% include 'components/nav-home.html' %}
-  {% endif %}
-  <!-- FLASH messages -->
+  <!-- navbar -->
+  {% include 'components/navbar.html' %}
+  <!-- flash messages -->
   {% include 'components/flash-messages.html' %}
   <!-- block content -->
   {% block content %} 

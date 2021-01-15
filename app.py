@@ -163,7 +163,7 @@ def logout():
     """
     flash("You have been successfully logged out!")
     session.pop("user")
-    return redirect(url_for("home"))
+    return redirect(url_for("login"))
 
 
 @app.route("/add/exercise", methods=["GET", "POST"])
