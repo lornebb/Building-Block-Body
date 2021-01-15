@@ -5,11 +5,11 @@
     <div class="row">
         {% for exercise in workout_exercises %}
             <div class="col s12 m6">
-                <div class="card hoverable blue-grey">
+                <div class="card small hoverable blue-grey">
                     <div class="card-content white-text">
                         <blockquote><h6>{{ exercise.body_target }}</h6></blockquote>
                         <span class="card-title">{{ exercise.exercise_name }}</span>
-                        <p>{{ exercise.instruction }}</p>
+                        <span>{{ exercise.instruction }}</span>
                     </div>
                     <div class="card-action">
                         <a href="{{ url_for('remove_from_workout', exercise_id=exercise._id) }}">Remove</a>
