@@ -21,18 +21,6 @@ mongo = PyMongo(app)
 @app.route("/")
 def home():
     """
-    This function loads the home landing page. Gets all exercises 
-    from the database and sends them to the page to iterate over,
-    using variable exercises.
-    """
-    exercises = mongo.db.exercises.find()
-    
-    return render_template("pages/home.html", exercises=exercises)   
-
-
-@app.route("/home-loggedin")
-def home_logged_in():
-    """
     This function loads the home landing page, checks if there is a user logged in
     then finds that users' workout array.
     It checks if that array is empty or not, if it isn't empty, then it goes through
@@ -40,12 +28,12 @@ def home_logged_in():
     It also passes all the exercises to the page to iterate over, too.
     These variables allow the page to show wether an exercise was made by
     the logged in user or not, and show edit/delete options if so.
+    If no session user then only displays page and sends the exercises list.
     """
     exercises = mongo.db.exercises.find()
 
-    username = mongo.db.users.find_one({"username": session["user"]})["username"]
-    
-    if username:
+    if session:
+        username = mongo.db.users.find_one({"username": session["user"]})["username"]
         current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
         current_user_workout = current_user_obj['workout']
         workout_exercises = []
@@ -62,11 +50,11 @@ def home_logged_in():
             workout_exercises.append(current_exercise)
 
         userexercises = mongo.db.exercises.find({ "user": username })
-        return render_template("pages/home.html", username=username, exercises=exercises, userexercises=list(userexercises),
+        return render_template("pages/home.html", title="Home", username=username, exercises=exercises, userexercises=list(userexercises),
                                 workout_exercise_id=workout_exercise_id, workout_exercises=workout_exercises)
     
     else:
-        return render_template("pages/home.html", exercises=exercises)
+        return render_template("pages/home.html", title="Home", exercises=exercises)
 
 
 @app.route("/register", methods=["GET", "POST"])
