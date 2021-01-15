@@ -1,0 +1,60 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+     <!-- log in -->
+        {% if login %}
+            <form class="col s12 m6 offset-m3" method="POST" action="{{ url_for('login') }}">
+        {% elif register %}
+            <form class="col s12 m6 offset-m3" method="POST" action="{{ url_for('register') }}">
+        {% endif %}
+            <div class="card-panel">
+                <div class="row center-align">
+                {% if login %}
+                    <div class="row center-align"><h4>Log In</h4></div>
+                    <div class="row center-align">Already have an account? Log In below.</div>
+                    <div class="row center-align">
+                        <a href="{{ url_for('register') }}"><p>Don't have an acount? Register</p></a>
+                    </div>  
+                {% elif register %}
+                    <div class="row center-align"><h4>Register</h4></div>
+                    <div class="row center-align">Don't have an account yet? Register below.</div>
+                    <div class="row center-align">
+                        <a href="{{ url_for('login') }}"><p>Already have an acount? Log in</p></a>
+                    </div>  
+                {% endif %}
+                </div>  
+                <!-- username -->
+                <div class="row">
+					<div class="input-field col s10 offset-s1">
+						<input id="username" name="username" type="text" class="validate" data-length="10">
+						<label for="username">Username</label>
+					</div>
+                </div>
+                <!-- password -->
+                <div class="row">
+                    <div class="input-field col s10 offset-s1">
+                        <input id="password" name="password" type="password" class="validate" data-length="10">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                {% if login %}
+                    <!-- Log In -->
+                    <div class="row">
+                        <button type="submit" class="col s6 offset-s3 btn-large">
+                            Log In
+                        </button>
+                    </div>
+                {% elif register %}
+                    <!-- register -->
+                    <div class="row">
+                        <button type="submit" class="col s6 offset-s3 btn-large">
+                            Register
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

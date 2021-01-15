@@ -98,7 +98,7 @@ def register():
         flash("Success! You are now registered.")
         return render_template("pages/profile.html", username=session["user"])
 
-    return render_template("pages/register.html")
+    return render_template("pages/auth.html", title="register", register=True)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -110,16 +110,16 @@ def login():
     # log in form - checks if user is registered
     if request.method == "POST":
         username_confirmed = mongo.db.users.find_one(
-        {"username": request.form.get("loginusername").lower()})
+        {"username": request.form.get("username").lower()})
         
         if username_confirmed:
             # checks that hashed password matches user input and creates session cookie
             if check_password_hash(
-                username_confirmed["password"], request.form.get("loginpassword")):
+                username_confirmed["password"], request.form.get("password")):
                     session["user"] = request.form.get(
-                        "loginusername").lower()
+                        "username").lower()
                     flash("Welcome back, {}".format(
-                        request.form.get("loginusername")))
+                        request.form.get("username")))
                     return redirect(url_for("profile", username=session["user"]))
             else:
                 # if password does not match
@@ -128,9 +128,9 @@ def login():
         else:
             # username is not in database
             flash("Incorrect details, please try again")
-            return render_template("pages/login.html")
+            return render_template("pages/auth.html")
 
-    return render_template("pages/login.html")
+    return render_template("pages/auth.html", title="Login", login=True)
 
 
 @app.route("/profile", methods=["GET", "POST"])
