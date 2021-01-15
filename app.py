@@ -184,7 +184,7 @@ def logout():
     return redirect(url_for("home"))
 
 
-@app.route("/add-exercise", methods=["GET", "POST"])
+@app.route("/add/exercise", methods=["GET", "POST"])
 def add_new_exercise():
     """
     Will render add new exercise page, and show form to create
@@ -225,7 +225,7 @@ def add_new_exercise():
     return render_template("pages/add-exercise.html", username=username, category_name=category_name)
 
 
-@app.route("/edit_exercise/<exercise_id>", methods=["GET", "POST"])
+@app.route("/edit/exercise/<exercise_id>", methods=["GET", "POST"])
 def edit_exercise(exercise_id):
     """
     Will render edit exercise page, and show form to pre-populated with
@@ -320,7 +320,7 @@ def workout():
     return render_template("pages/workout.html")
 
 
-@app.route("/workout_add/<exercise_id>")
+@app.route("/workout/add/<exercise_id>")
 def add_to_workout(exercise_id):
     """
     Adds exercise to users workout list by pushing 
@@ -333,7 +333,7 @@ def add_to_workout(exercise_id):
     return redirect(url_for("workout"))
 
 
-@app.route("/workout_remove/<exercise_id>")
+@app.route("/workout/remove/<exercise_id>")
 def remove_from_workout(exercise_id):
     """
     Removes exercise from workout by taking the id string 
