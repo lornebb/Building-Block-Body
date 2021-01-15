@@ -31,7 +31,7 @@ def home():
     """
     exercises = mongo.db.exercises.find()
 
-    if session:
+    if 'user' in session:
         username = mongo.db.users.find_one({"username": session["user"]})["username"]
         current_user_obj = mongo.db.users.find_one({'username': session['user'].lower()})
         current_user_workout = current_user_obj['workout']
@@ -163,7 +163,7 @@ def logout():
     """
     flash("You have been successfully logged out!")
     session.pop("user")
-    return redirect(url_for("login"))
+    return redirect(url_for("home"))
 
 
 @app.route("/add/exercise", methods=["GET", "POST"])
