@@ -1,0 +1,9 @@
+[{
+    "_id": "<ObjectId()>",
+    "body_target": "<string>",
+    "exercise_name": "<string>",
+    "instruction": "<string>",
+    "est_time": "<int>",
+    "difficulty": "<string>",
+    "user": "<string>"
+}]

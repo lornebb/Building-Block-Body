@@ -1,0 +1,8 @@
+[{
+    "_id": "<ObjectId()>",
+    "username": "<string>",
+    "password": "<binary_hashed_string>",
+    "workout": {
+        "0": "<string>"
+    }
+}]
