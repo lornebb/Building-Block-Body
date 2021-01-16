@@ -12,7 +12,6 @@
             </div>
             <div class="input-field col s12 m2">
                 <select id="body_target" name="body-target" class="validate" required>
-                    <option value="" disabled>Choose Main Body target</option>
                     {% for target_category in category_name %}
                         {% if target_category.exercise_name == exercise.exercise_name %}
                             <option value="{{ target_category.body_target }}" selected>{{ target_category.body_target }}</option>
