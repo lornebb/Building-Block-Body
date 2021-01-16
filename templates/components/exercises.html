@@ -1,6 +1,5 @@
 <div class="col s12 m4">
     <div class="card medium">
-        <!-- cycle through images for correct to match body target -->
         <div class="card-image">
             {% if exercise.body_target|lower == "upper body" %}
                 <img src="{{ url_for('static', filename='images/body-target-imgs/upperbody.jpg') }}" >
@@ -13,13 +12,11 @@
             {% endif %}
             <span class="card-title">{{ exercise.exercise_name }}</span>
         </div>
-        <!-- exercise instruction -->
         <div class="card-content">
             <span class="grey lighten-2">{{ exercise.body_target }}</span>
             <i>{{ exercise.difficulty }}, {{ exercise.est_time }}mins</i>
             <p>{{ exercise.instruction }}</p>
         </div>
-        <!-- add to workout button and edit and delete boxes -->
         {% if session.user %}
         <div class="card-action center-align">
             {% if exercise._id in workout_exercise_id %}
@@ -35,7 +32,6 @@
         {% endif %}
     </div>
 </div>
- <!-- delete modal content -->
  <div id="{{ exercise._id }}" class="modal">
     <div class="modal-content">
         <h4>Are you sure you want to delete?</h4>

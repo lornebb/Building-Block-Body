@@ -5,13 +5,11 @@
 
 <section class="section">
     <form method="POST" action="{{ url_for('edit_exercise', exercise_id=exercise._id) }}">
-        <!-- exercise name and body target row -->
         <div class="row">  
             <div class="input-field col s12 m2 offset-m4">
                 <input value="{{ exercise.exercise_name }}" id="exercise-name" name="exercise-name" type="text" class="validate" required>
                 <label for="exercise-name">Exercise Name</label>
             </div>
-            <!-- body_target selection -->
             <div class="input-field col s12 m2">
                 <select id="body_target" name="body-target" class="validate" required>
                     <option value="" disabled>Choose Main Body target</option>
@@ -26,13 +24,11 @@
                 <label for="body-target">Main Body Target</label>
             </div>
         </div> 
-        <!-- estimated time and difficulty row -->
         <div class="row">
             <div class="input-field col s12 m2 offset-m4">
                 <input placeholder="est time" id="est-time" name="est-time" value="{{ exercise.est_time }}" type="text" class="validate" minlength="1" maxlength="1" pattern="[0-9]" required>
                 <label for="est-time">Est. Time 0 - 9 minutes</label>
             </div>
-            <!-- difficulty -->
             <div class="input-field col s12 m2">
                 <select name="difficulty" required>
                     <option>Easy</option>
@@ -42,14 +38,12 @@
                 <label for="difficulty">Add a Difficulty</label>
             </div>
         </div>
-        <!-- exercise instruction -->
         <div class="row">
             <div class="input-field col s12 m6 offset-m3">
                 <input value="{{ exercise.instruction }}" id="instruction" name="instruction" type="text" class="validate" required>
                 <label for="instruction">Instruction</label>
             </div>
         </div>
-        <!-- edit exercise submit button -->
         <div class="row">
             <div class="center-align">
                 <button type="submit" class="waves-effect waves-light btn-large" aria-label="edit exercise"><i class="material-icons right">add_box</i>Edit Exercise</button>

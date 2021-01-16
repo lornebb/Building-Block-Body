@@ -2,7 +2,6 @@
 {% block content %}
 <div class="container">
     <div class="row">
-     <!-- log in -->
         {% if login %}
             <form class="col s12 m6 offset-m3" method="POST" action="{{ url_for('login') }}">
         {% elif register %}
@@ -24,14 +23,12 @@
                     </div>  
                 {% endif %}
                 </div>  
-                <!-- username -->
                 <div class="row">
 					<div class="input-field col s10 offset-s1">
 						<input id="username" name="username" type="text" class="validate" data-length="10" minlength="5" maxlength="10">
 						<label for="username">Username</label>
 					</div>
                 </div>
-                <!-- password -->
                 <div class="row">
                     <div class="input-field col s10 offset-s1">
                         <input id="password" name="password" type="password" class="validate" data-length="10" minlength="5" maxlength="10">
@@ -39,14 +36,12 @@
                     </div>
                 </div>
                 {% if login %}
-                    <!-- Log In -->
                     <div class="row">
                         <button type="submit" class="col s6 offset-s3 btn-large" aria-label="log in">
                             Log In
                         </button>
                     </div>
                 {% elif register %}
-                    <!-- register -->
                     <div class="row">
                         <button type="submit" class="col s6 offset-s3 btn-large" aria-label="register">
                             Register
