@@ -48,7 +48,8 @@ If you would like to **get in touch** about this project, head over to my github
   - [Other notable bugs during development](#other-notable-bugs-during-development)
     - [Profile render user exercises else seperate display](#profile-render-user-exercises-else-seperate-display)
     - [First exercise being edit and deletable](#first-exercise-being-edit-and-deletable)
-    - [500 error for workout/exercise delete](#500-error-for-workout-exercise-delete)
+    - [500 error for workout/exercise delete](#500-error-for-workoutexercise-delete)
+    - [Delete Modal Bug](#delete-modal-bug)
   - [Deployment](#deployment)
     - [Cloning Work It Out from GitHub](#cloning-work-it-out-from-github)
     - [Deploying Work It Out to Heroku](#deploying-work-it-out-to-heroku)
@@ -571,6 +572,16 @@ Option 2 seemed more appealing since it meant not having to reset the database, 
 I went to try option 2, which would work for testing the bug if I made a new user on each test. As once this error occurred, it would render a user profile unusable unless deleting the workout in the database. After another few hours of getting 'NoneType' and 'Not Iterable' errors, I called up tutor support at Code Institute for help, and together we changed the fundamentals of the add_to_workout function, so that instead of adding ObjectId's to a users workout array, it added the string of the _id instead, which made the whole process much easier to deal with.
 
 Eventually, this was fixed, and I learned a lot of bug squashing in python.
+
+[Back to Top](##contents)
+
+### Delete modal bug
+
+Right at the end of development, on testing, I noticed that when a user deletes an exercise, the first exercise of the page woul dget deleted, regardless of what exercise was seleted to delete. After using Chrome inspector to figure out what was happening on the render - it appeared that the modal selection was only ever selecting the first instance of it.
+
+To fix this I passed the exercise Id into the modal ID and data-target ID tags, which meant that only the modal rendered for each instance would ever be selected with a unique id.
+
+I'm so glad I caught this. It was fixed, tested and then commited.
 
 [Back to Top](##contents)
 
