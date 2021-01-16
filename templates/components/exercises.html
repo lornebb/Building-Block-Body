@@ -29,21 +29,21 @@
             {% endif %}
             {% if session.user|lower == exercise.user|lower %}
             <a href="{{ url_for('edit_exercise', exercise_id=exercise._id) }}" class="btn-small yellow darken-2 tooltipped" data-position="top" data-tooltip="edit" aria-label="edit exercise"><i class="material-icons">create</i></a>
-            <button data-target="delete-modal" class="btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="delete" aria-label="delete exercise"><i class="material-icons">delete_forever</i></button>
-            <!-- delete modal content -->
-            <div id="delete-modal" class="modal">
-                <div class="modal-content">
-                    <h4>Are you sure you want to delete?</h4>
-                </div>
-                <div class="modal-footer">
-                    <form method="POST" action="{{ url_for('delete_exercise', exercise_id=exercise._id) }}">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text" aria-label="dont delete this exercise">No, close!</a>
-                        <button type="submit" class="modal-close waves-effect waves-green btn-flat red white-text" aria-label="delete confirm">Delete</button>
-                    </form>
-                </div>
-            </div>
+            <button data-target="{{ exercise._id }}" class="btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="delete" aria-label="delete exercise"><i class="material-icons">delete_forever</i></button>
             {% endif %}
         </div>
         {% endif %}
+    </div>
+</div>
+ <!-- delete modal content -->
+ <div id="{{ exercise._id }}" class="modal">
+    <div class="modal-content">
+        <h4>Are you sure you want to delete?</h4>
+    </div>
+    <div class="modal-footer">
+        <form method="POST" action="{{ url_for('delete_exercise', exercise_id=exercise._id) }}">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat teal white-text" aria-label="dont delete this exercise">No, close!</a>
+            <button type="submit" class="modal-close waves-effect waves-green btn-flat red white-text" aria-label="delete confirm">Delete</button>
+        </form>
     </div>
 </div>
