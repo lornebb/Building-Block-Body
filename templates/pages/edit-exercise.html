@@ -29,7 +29,7 @@
         <!-- estimated time and difficulty row -->
         <div class="row">
             <div class="input-field col s12 m2 offset-m4">
-                <input placeholder="est time between 1 - 9 mins" id="est-time" name="est-time" value="{{ exercise.est_time }}" type="text" class="validate" minlength="1" maxlength="1" required>
+                <input placeholder="est time" id="est-time" name="est-time" value="{{ exercise.est_time }}" type="text" class="validate" minlength="1" maxlength="1" pattern="[0-9]" required>
                 <label for="est-time">Est. Time 0 - 9 minutes</label>
             </div>
             <!-- difficulty -->
